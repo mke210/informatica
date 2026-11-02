@@ -9,7 +9,7 @@
 :root{
   --bg:#EDF1F6; --surface:#FFFFFF; --surface-2:#F2F5F9; --ink:#121B2B; --muted:#56637A; --line:#D5DDE8;
   --stage-1:#F4F7FB; --stage-2:#DCE5F0; --desk:#CBD5E2; --desk-edge:#B4C0D0; --shadow:rgba(18,27,43,.16);
-  --acc-partes:#1F63D6; --acc-interior:#B4318A; --acc-software:#17855A; --on-accent:#FFFFFF;
+  --acc-partes:#1F63D6; --acc-interior:#B4318A; --acc-software:#17855A; --acc-componentes:#C2561C; --acc-sistemas:#0E7C86; --acc-escritorio:#4B4FD6; --acc-investiga:#0369A1; --acc-verifica:#BE123C; --on-accent:#FFFFFF;
   --ok:#1E8A4C; --bad:#C3362B; --scrim:rgba(10,16,28,.55);
   --font-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
   --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
@@ -20,7 +20,7 @@
   :root:not([data-theme="light"]){
     --bg:#0B111B; --surface:#111A27; --surface-2:#172232; --ink:#E4EAF3; --muted:#95A3B8; --line:#243246;
     --stage-1:#1C2A40; --stage-2:#0F1828; --desk:#22314A; --desk-edge:#2D4060; --shadow:rgba(0,0,0,.4);
-    --acc-partes:#6FA4FF; --acc-interior:#F07CC8; --acc-software:#4FCB8E; --on-accent:#0B111B;
+    --acc-partes:#6FA4FF; --acc-interior:#F07CC8; --acc-software:#4FCB8E; --acc-componentes:#FF9B5E; --acc-sistemas:#4FD1C5; --acc-escritorio:#A3A6FF; --acc-investiga:#5CC3FF; --acc-verifica:#FF7A9A; --on-accent:#0B111B;
     --ok:#4CC97F; --bad:#FF7A6E; --scrim:rgba(2,5,10,.7);
     color-scheme:dark;
   }
@@ -28,13 +28,18 @@
 :root[data-theme="dark"]{
   --bg:#0B111B; --surface:#111A27; --surface-2:#172232; --ink:#E4EAF3; --muted:#95A3B8; --line:#243246;
   --stage-1:#1C2A40; --stage-2:#0F1828; --desk:#22314A; --desk-edge:#2D4060; --shadow:rgba(0,0,0,.4);
-  --acc-partes:#6FA4FF; --acc-interior:#F07CC8; --acc-software:#4FCB8E; --on-accent:#0B111B;
+  --acc-partes:#6FA4FF; --acc-interior:#F07CC8; --acc-software:#4FCB8E; --acc-componentes:#FF9B5E; --acc-sistemas:#4FD1C5; --acc-escritorio:#A3A6FF; --acc-investiga:#5CC3FF; --acc-verifica:#FF7A9A; --on-accent:#0B111B;
   --ok:#4CC97F; --bad:#FF7A6E; --scrim:rgba(2,5,10,.7);
   color-scheme:dark;
 }
 body[data-view="partes"]{--accent:var(--acc-partes)}
 body[data-view="interior"]{--accent:var(--acc-interior)}
 body[data-view="software"]{--accent:var(--acc-software)}
+body[data-view="componentes"]{--accent:var(--acc-componentes)}
+body[data-view="sistemas"]{--accent:var(--acc-sistemas)}
+body[data-view="escritorio"]{--accent:var(--acc-escritorio)}
+body[data-view="investiga"]{--accent:var(--acc-investiga)}
+body[data-view="verifica"]{--accent:var(--acc-verifica)}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -169,6 +174,8 @@ main{padding-block:20px 40px}
 .pin i::after{content:""; position:absolute; inset:-5px; border-radius:50%; border:2px solid var(--pc); opacity:0; animation:ring 2.4s ease-out infinite}
 @keyframes ring{0%{transform:scale(.5); opacity:.9} 100%{transform:scale(1.6); opacity:0}}
 .stage.nolabels .pins, .stage.quiz .pins{display:none}
+.pin .ps{display:none}
+@media (max-width:640px){ .pin .pl{display:none} .pin .ps{display:inline} }
 @media (max-width:640px){ .pin{font-size:11px; padding:3px 8px 3px 5px; gap:5px} .pin i{width:8px; height:8px} }
 .quiz-banner{position:absolute; left:50%; top:14px; transform:translateX(-50%); background:var(--ink); color:var(--bg); padding:8px 16px; border-radius:999px; font-weight:700; font-size:15px; box-shadow:0 8px 20px -8px rgba(0,0,0,.5); pointer-events:none; max-width:calc(100% - 28px); text-align:center; line-height:1.3}
 .quiz-banner span{color:var(--accent)}
@@ -282,6 +289,84 @@ tbody th{font-weight:700; width:24%}
 footer{border-top:1px solid var(--line)}
 footer .wrap{padding-block:18px 26px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; color:var(--muted)}
 
+/* Temas 4-6 */
+.sc-card{fill:var(--surface); stroke:var(--line); stroke-width:1.5}
+.sc-sub{fill:var(--surface-2); stroke:var(--line)}
+.sc-h{font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:.14em; fill:var(--muted)}
+.sc-n{font-family:var(--font-body); font-weight:700; font-size:16px; fill:var(--ink); text-anchor:middle}
+.sc-s{font-family:var(--font-body); font-size:12.5px; fill:var(--muted); text-anchor:middle}
+.sc-bt{font-family:var(--font-display); font-weight:800; font-size:19px; fill:#FFFFFF}
+.sc-row{font-family:var(--font-body); font-size:14px; fill:var(--ink)}
+.sc-arrow{stroke:var(--muted); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round}
+.dsk-l{font-family:var(--font-body); font-size:11.5px; font-weight:700; fill:#FFFFFF; text-anchor:middle; stroke:#0B1B3A; stroke-width:3px; stroke-opacity:.55; paint-order:stroke}
+.dsk-w{font-family:var(--font-body); font-size:13px; font-weight:700; fill:#1B2433}
+.dsk-t{font-family:var(--font-body); font-size:12px; fill:#C9D3E0}
+.dsk-c{font-family:var(--font-body); font-size:11px; fill:#E9EEF5; text-anchor:end}
+.wdemo{position:relative; height:240px; border-radius:12px; overflow:hidden; background:linear-gradient(135deg,#8FBCFA,#2F62D6)}
+.wwin{position:absolute; left:20px; top:16px; width:min(270px, calc(100% - 40px)); background:#FFFFFF; color:#1B2433; border-radius:8px; box-shadow:0 12px 30px -10px rgba(0,0,0,.45); overflow:hidden}
+.wwin.max{left:0!important; top:0!important; width:100%; height:calc(100% - 36px); border-radius:0}
+.wbar{display:flex; justify-content:space-between; align-items:center; gap:6px; padding:4px 4px 4px 12px; background:#EEF2F8; cursor:move; font-size:13px; font-weight:700; touch-action:none; user-select:none; -webkit-user-select:none}
+.wbtns{display:flex}
+.wbtns button{appearance:none; border:0; background:transparent; width:34px; height:28px; border-radius:4px; cursor:pointer; font-size:14px; color:#1B2433}
+.wbtns button:hover{background:#DFE5EE}
+.wbtns .x:hover{background:#E5484D; color:#FFFFFF}
+.wbody{padding:14px 12px; font-size:13.5px; min-height:90px}
+.wtask{position:absolute; left:0; right:0; bottom:0; height:36px; background:#1E2633; display:flex; align-items:center; gap:8px; padding:0 10px}
+.wtask button{appearance:none; border:0; background:#2C3646; color:#FFFFFF; font-size:12.5px; padding:4px 10px; border-radius:6px; cursor:pointer}
+.wtask button:hover{background:#3A4659}
+
+/* Temas 7-8 */
+.inv-road{fill:none; stroke:var(--line); stroke-width:22; stroke-linecap:round; stroke-linejoin:round}
+.inv-lane{fill:none; stroke:var(--surface); stroke-width:3; stroke-dasharray:10 12; animation:lane 1.6s linear infinite}
+.inv-walker{fill:var(--accent); stroke:var(--surface); stroke-width:3; offset-rotate:0deg; animation:walk 18s linear infinite}
+@keyframes lane{to{stroke-dashoffset:-44}}
+@keyframes walk{from{offset-distance:0%} to{offset-distance:100%}}
+.inv-badge{fill:var(--surface); stroke-width:3}
+.inv-num{font-family:var(--font-display); font-weight:800; font-size:17px; text-anchor:middle}
+.vf-chrome{fill:var(--surface-2)} .vf-tab{fill:var(--surface)}
+.vf-tt{font-family:var(--font-body); font-size:13px; font-weight:700; fill:var(--ink)}
+.vf-addr{fill:var(--surface-2); stroke:var(--line)}
+.vf-url{font-family:var(--font-mono); font-size:14px; fill:var(--ink)} .vf-url-s{fill:#16A34A}
+.vf-line{stroke:var(--line); fill:none}
+.vf-pill{font-family:var(--font-body); font-weight:700; font-size:12px; fill:#FFFFFF; text-anchor:middle; letter-spacing:.04em}
+.vf-h{font-family:var(--font-display); font-weight:800; font-size:25px; fill:var(--ink)}
+.vf-b{font-family:var(--font-body); font-size:15px; fill:var(--ink)}
+.vf-sm{font-family:var(--font-body); font-size:12.5px; fill:var(--muted)}
+.vf-err{fill:var(--bad)}
+.vf-av{fill:var(--line)} .vf-avf{fill:var(--muted)}
+.vf-ic{stroke:var(--muted)}
+.vf-cap{font-family:var(--font-body); font-size:11px; fill:#FFFFFF; text-anchor:middle}
+.vf-box{fill:var(--surface-2); stroke:var(--line); stroke-dasharray:6 5}
+.vf-box2{fill:var(--surface-2); stroke:var(--line)}
+.vf-q{font-family:var(--font-display); font-weight:800; font-size:24px; fill:var(--bad); text-anchor:end}
+.vf-share{font-family:var(--font-body); font-weight:700; font-size:16px; fill:#FFFFFF; text-anchor:middle}
+.vf-ad-l{font-family:var(--font-mono); font-size:10px; letter-spacing:.14em; fill:#8A6A1F}
+.vf-ad-t{font-family:var(--font-display); font-weight:800; font-size:17px; fill:#3A2A00}
+.vf-ad-s{font-family:var(--font-body); font-size:13px; font-weight:700; fill:#8A4A00}
+.cl{display:grid; gap:6px}
+.cl-i{display:flex; gap:10px; align-items:flex-start; padding:9px 12px; border-radius:10px; background:var(--surface); border:1px solid var(--line); cursor:pointer; font-size:14.5px}
+.cl-i input{accent-color:var(--ic); width:18px; height:18px; margin:2px 0 0; flex:none}
+.funnel{display:grid; gap:6px; justify-items:center}
+.funnel div{max-width:100%; padding:9px 12px; border-radius:10px; background:color-mix(in srgb, var(--ic) var(--o), var(--surface)); text-align:center; font-weight:700; font-size:14px}
+.seg{display:flex; gap:6px; flex-wrap:wrap}
+.apa-grid{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px 10px}
+@media (max-width:520px){ .apa-grid{grid-template-columns:minmax(0,1fr)} }
+.apa-f{display:grid; gap:4px; font-size:12.5px; color:var(--muted); font-weight:700; min-width:0}
+.apa-f .tr-in{font-family:var(--font-body); font-weight:400; color:var(--ink)}
+.apa-out{padding:12px 14px 12px 2.2em; text-indent:-1.6em; border-radius:12px; background:var(--surface); border:1px solid var(--line); font-size:15px; line-height:1.5; overflow-wrap:anywhere}
+.sbox.span3{grid-column:1 / -1}
+.game{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px}
+@media (max-width:1100px){ .game{grid-template-columns:repeat(2, minmax(0,1fr))} }
+@media (max-width:640px){ .game{grid-template-columns:minmax(0,1fr)} }
+.gcard{border:1.5px solid var(--line); border-radius:14px; padding:12px 14px; display:grid; gap:10px; align-content:start; background:var(--surface-2); min-width:0}
+.gcard p{margin:0; font-size:14.5px}
+.gbtns{display:flex; gap:8px; flex-wrap:wrap}
+.gbtns .btn:disabled{cursor:default; opacity:.55}
+.gbtns .btn.solid:disabled{opacity:1}
+.gcard.gok{border-color:var(--ok)} .gcard.gbad{border-color:var(--bad)}
+.gcard .gfb{font-size:13.5px; color:var(--muted)}
+.gfb:empty{display:none}
+
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{animation:none !important; transition-duration:.01ms !important}
 }
@@ -306,7 +391,7 @@ footer .wrap{padding-block:18px 26px; display:flex; justify-content:space-betwee
         <p class="eyebrow">Tecnología · Secundaria</p>
         <h1 class="hero-title">Informática</h1>
         <p class="hero-sig">powered by elprofechan</p>
-        <p class="hero-lead">Conoce cómo funciona una computadora por fuera y por dentro, y qué programas le dicen qué hacer. Toca cada parte para ver su ficha completa.</p>
+        <p class="hero-lead">Conoce cómo funciona una computadora por fuera y por dentro, qué programas le dicen qué hacer, cómo usar Windows 11, cómo investigar y cómo reconocer información verdadera. Toca cada parte para ver su ficha completa.</p>
       </div>
       <div><svg class="hero-art" id="hero-art" viewBox="0 0 900 560" role="img" aria-label="Ilustración de un procesador con circuitos y tarjetas flotantes de monitor, memoria RAM, código binario y software"></svg></div>
     </div>
@@ -840,10 +925,521 @@ const VIEWS = {
   }
 };
 
+/* ---------- Íconos extra ---------- */
+Object.assign(IC, {
+  ventilador:'<circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="4"/><path d="M24 20c-2-6 0-10 5-11M28 24c6-2 10 0 11 5M24 28c2 6 0 10-5 11M20 24c-6 2-10 0-11-5"/>',
+  gpu:'<rect x="4" y="12" width="40" height="22" rx="3"/><circle cx="16" cy="23" r="6"/><circle cx="32" cy="23" r="6"/><path d="M8 34v5M14 34v3M20 34v3M26 34v3M32 34v3"/>',
+  sonido:'<path d="M8 19h7l9-7v24l-9-7H8z"/><path d="M31 18c2 2 3 4 3 6s-1 4-3 6M36 13c4 3 6 7 6 11s-2 8-6 11"/>',
+  red:'<path d="M6 19c10-9 26-9 36 0M12 25c7-6 17-6 24 0M18 31c4-3 8-3 12 0"/><circle cx="24" cy="37" r="2.5"/>',
+  capas:'<path d="M24 6 42 15 24 24 6 15z"/><path d="M6 24l18 9 18-9M6 33l18 9 18-9"/>',
+  lista:'<path d="M8 13l3 3 6-6M8 25l3 3 6-6M8 37l3 3 6-6M22 13h18M22 25h18M22 37h18"/>',
+  celular:'<rect x="14" y="4" width="20" height="40" rx="4"/><path d="M21 38h6"/>',
+  router:'<rect x="5" y="26" width="38" height="12" rx="3"/><path d="M12 32h.01M18 32h.01M24 32h.01M14 26l-3-12M34 26l3-12"/>',
+  laptop:'<rect x="9" y="10" width="30" height="20" rx="2"/><path d="M4 36h40l-3-6H7z"/>',
+  terminal:'<rect x="5" y="8" width="38" height="32" rx="3"/><path d="M12 19l6 5-6 5M22 31h12"/>',
+  carpeta:'<path d="M5 13a3 3 0 0 1 3-3h10l4 4h18a3 3 0 0 1 3 3v19a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z"/>',
+  imagen:'<rect x="5" y="8" width="38" height="32" rx="3"/><circle cx="16" cy="18" r="4"/><path d="M5 34l11-10 9 8 6-5 12 10"/>',
+  inicio:'<circle cx="13" cy="13" r="3"/><circle cx="24" cy="13" r="3"/><circle cx="35" cy="13" r="3"/><circle cx="13" cy="24" r="3"/><circle cx="24" cy="24" r="3"/><circle cx="35" cy="24" r="3"/><circle cx="13" cy="35" r="3"/><circle cx="24" cy="35" r="3"/><circle cx="35" cy="35" r="3"/>',
+  barra:'<rect x="10" y="8" width="28" height="16" rx="2"/><rect x="4" y="30" width="40" height="10" rx="3"/><path d="M15 35h.01M21 35h.01M27 35h.01M33 35h.01"/>',
+  campana:'<path d="M14 32V21a10 10 0 0 1 20 0v11l3 4H11z"/><path d="M20 40a4 4 0 0 0 8 0"/>',
+  ventanas:'<rect x="14" y="6" width="28" height="22" rx="3"/><path d="M14 12h28"/><rect x="6" y="18" width="28" height="24" rx="3"/><path d="M6 24h28"/>',
+  lupa:'<circle cx="21" cy="21" r="12"/><path d="M30 30l11 11"/>'
+});
+
+/* ---------- Escena 4: componentes internos ---------- */
+function sceneComponentes(){
+  let traces='';
+  [[226,320,300,320,300,330],[226,160,300,160,300,190],[410,250,420,250,420,140],[260,520,260,500,420,500],[520,330,520,400],[300,300,300,330],[226,440,236,440]].forEach(p=>{let d='M'+p[0]+' '+p[1];for(let i=2;i<p.length;i+=2)d+='L'+p[i]+' '+p[i+1];traces+=`<path d="${d}" fill="none" stroke="#6FA8FF" stroke-width="2" opacity=".28"/>`});
+  let socketDots='';
+  for(let i=0;i<9;i++)for(let j=0;j<9;j++){const x=320+i*10.5, y=210+j*10.5; if(x>326&&x<396&&y>216&&y<286) continue; socketDots+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.3" fill="#C9A227" opacity=".7"/>`}
+  let ram='';
+  [0,1,2,3].forEach(i=>{const x=432+i*20;
+    ram+=`<rect x="${x}" y="150" width="10" height="180" rx="2" fill="#0E141C" stroke="#46546A"/><rect x="${x-1}" y="146" width="12" height="6" rx="1.5" fill="#D9DEE5"/><rect x="${x-1}" y="328" width="12" height="6" rx="1.5" fill="#D9DEE5"/>`;
+    if(i%2===0){ ram+=`<rect x="${x-2}" y="154" width="14" height="172" rx="2" fill="#1E8A4C" stroke="#0F5A30"/>`; for(let c=0;c<5;c++) ram+=`<rect x="${x+1}" y="${164+c*32}" width="8" height="22" rx="1" fill="#14171B"/>`; ram+=`<circle cx="${x+5}" cy="158" r="1.6" fill="#7CFFB0" class="blink b2"/>`; }
+  });
+  return `<svg class="scene" viewBox="0 0 900 580" role="img" aria-label="Gabinete abierto con todos los componentes internos: fuente de poder, procesador, ventilador y disipador, memoria RAM, almacenamiento, tarjeta gráfica, tarjeta madre, tarjeta de sonido y tarjeta de red">
+  <defs>
+    <linearGradient id="gPcb4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1D3358"/><stop offset="1" stop-color="#14243F"/></linearGradient>
+    <linearGradient id="gChip4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF1F5"/><stop offset=".5" stop-color="#B9C2CD"/><stop offset="1" stop-color="#DCE2E9"/></linearGradient>
+    <linearGradient id="gHdd4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#AEB8C4"/><stop offset="1" stop-color="#7D8895"/></linearGradient>
+    <linearGradient id="gSink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9AA5B2"/><stop offset="1" stop-color="#5E6976"/></linearGradient>
+    <pattern id="pMesh4" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#14181D"/><circle cx="4" cy="4" r="1.9" fill="#2B323B"/></pattern>
+  </defs>
+  <g class="hot" data-id="gabinete">
+    <rect x="182" y="556" width="56" height="14" rx="5" fill="#111418"/><rect x="662" y="556" width="56" height="14" rx="5" fill="#111418"/>
+    <rect x="150" y="20" width="600" height="540" rx="16" fill="#1A1E25" stroke="#3B4452" stroke-width="2"/>
+    <rect x="166" y="36" width="568" height="508" rx="8" fill="#262D37"/>
+    <rect x="548" y="36" width="186" height="508" fill="#1F252E"/>
+    <rect x="564" y="52" width="154" height="30" rx="4" fill="#15191F" stroke="#3B4452"/>
+    <rect x="564" y="90" width="154" height="30" rx="4" fill="#15191F" stroke="#3B4452"/>
+    <rect x="564" y="128" width="154" height="30" rx="4" fill="#15191F" stroke="#3B4452"/>
+    <rect x="564" y="350" width="154" height="176" rx="8" fill="url(#pMesh4)" stroke="#2C333D"/>
+    <circle cx="641" cy="438" r="62" fill="none" stroke="#3B4452" stroke-width="2"/>
+    <g class="spin slow"><circle cx="641" cy="438" r="56" fill="none"/>${[0,90,180,270].map(a=>`<path d="M641 438 C 650 410, 668 396, 690 400 C 676 418, 660 430, 641 438Z" fill="#323A45" opacity=".9" transform="rotate(${a} 641 438)"/>`).join('')}</g>
+    <circle cx="641" cy="438" r="10" fill="#3B4452"/>
+    ${Array.from({length:8},(_,i)=>`<rect x="172" y="${150+i*12}" width="16" height="5" rx="2" fill="#1A1E25"/>`).join('')}
+  </g>
+
+  <g class="hot" data-id="madre">
+    <rect x="196" y="140" width="330" height="380" rx="6" fill="url(#gPcb4)" stroke="#34507A" stroke-width="1.5"/>
+    ${traces}
+    <circle cx="208" cy="152" r="5" fill="#262D37" stroke="#C9B26A" stroke-width="1.5"/><circle cx="514" cy="152" r="5" fill="#262D37" stroke="#C9B26A" stroke-width="1.5"/><circle cx="208" cy="508" r="5" fill="#262D37" stroke="#C9B26A" stroke-width="1.5"/><circle cx="514" cy="508" r="5" fill="#262D37" stroke="#C9B26A" stroke-width="1.5"/>
+    <rect x="196" y="156" width="28" height="150" rx="3" fill="#8A94A1"/>
+    <rect x="202" y="168" width="16" height="9" rx="1.5" fill="#1B1F25"/><rect x="202" y="184" width="16" height="9" rx="1.5" fill="#1B1F25"/><rect x="202" y="202" width="16" height="13" rx="1.5" fill="#1B1F25"/><rect x="202" y="224" width="16" height="12" rx="1.5" fill="#1B1F25"/>
+    <rect x="240" y="350" width="210" height="9" rx="2" fill="#0E141C" stroke="#46546A"/>
+    <rect x="240" y="426" width="150" height="8" rx="2" fill="#0E141C" stroke="#46546A"/>
+    <rect x="240" y="482" width="150" height="8" rx="2" fill="#0E141C" stroke="#46546A"/>
+    <rect x="430" y="412" width="62" height="62" rx="8" fill="#3B4552" stroke="#566273"/>
+    <path d="M438 424h46M438 434h46M438 444h46M438 454h46M438 464h46" stroke="#2A323C" stroke-width="3"/>
+    <rect x="506" y="198" width="14" height="92" rx="2" fill="#E9ECEF" stroke="#B6BDC6"/>
+    <circle cx="488" cy="372" r="11" fill="#C3CAD3" stroke="#8A94A1"/>
+  </g>
+
+  <g class="hot" data-id="cpu">
+    <rect x="314" y="204" width="94" height="94" rx="7" fill="#10151B" stroke="#56606E" stroke-width="1.5"/>
+    ${socketDots}
+    <rect x="326" y="216" width="70" height="70" rx="5" fill="url(#gChip4)" stroke="#8C96A3"/>
+    <path d="M330 282h9l-9-9z" fill="#C9A227"/>
+    <text x="361" y="256" class="chiptxt" style="font-size:14px">CPU</text>
+    <rect x="320" y="210" width="82" height="82" rx="7" fill="none" stroke="#B48CFF" stroke-width="2" class="glow"/>
+  </g>
+
+  <g class="hot" data-id="ram">${ram}</g>
+
+  <g class="hot" data-id="fuente">
+    <path d="M410 116 C 470 130, 490 190, 510 210" fill="none" stroke="#1B1F25" stroke-width="12" stroke-linecap="round"/>
+    <path d="M408 112 C 468 126, 486 190, 506 210" fill="none" stroke="#F08A24" stroke-width="2.5"/>
+    <path d="M410 116 C 470 130, 490 190, 510 210" fill="none" stroke="#F5C542" stroke-width="2.5"/>
+    <path d="M412 120 C 472 134, 494 190, 514 210" fill="none" stroke="#444" stroke-width="2.5"/>
+    <path d="M410 116 C 470 130, 490 190, 510 210" fill="none" stroke="#FFE27A" stroke-width="3" class="flow"/>
+    <path d="M400 120 C 520 160, 530 300, 512 338" fill="none" stroke="#F08A24" stroke-width="5" stroke-linecap="round"/>
+    <path d="M400 120 C 520 160, 530 300, 512 338" fill="none" stroke="#FFE27A" stroke-width="2" class="flow"/>
+    <rect x="180" y="44" width="240" height="80" rx="6" fill="#16191E" stroke="#3B4452" stroke-width="1.5"/>
+    <rect x="186" y="50" width="62" height="68" rx="4" fill="url(#pMesh4)"/>
+    <rect x="262" y="58" width="96" height="52" rx="3" fill="#E6E8EB"/>
+    <text x="310" y="80" class="drvtxt dk" style="font-size:14px">750 W</text>
+    <path d="M274 92h72M274 99h48" stroke="#A9B0BA" stroke-width="2"/>
+    <path d="M372 60v50M382 60v50M392 60v50M402 60v50" stroke="#2A3038" stroke-width="4"/>
+  </g>
+
+  <g class="hot" data-id="gpu">
+    <rect x="200" y="330" width="14" height="70" rx="2" fill="#A3ACB8"/>
+    <rect x="203" y="340" width="8" height="12" rx="1" fill="#1B1F25"/><rect x="203" y="358" width="8" height="12" rx="1" fill="#1B1F25"/><rect x="203" y="376" width="8" height="10" rx="1" fill="#1B1F25"/>
+    <rect x="214" y="336" width="300" height="54" rx="9" fill="#1D222A" stroke="#3E4652" stroke-width="1.5"/>
+    <path d="M300 336 L330 390 M420 336 L450 390" stroke="#8C96A3" stroke-width="3"/>
+    <rect x="226" y="346" width="64" height="34" rx="6" fill="#262C35"/>
+    <text x="258" y="368" class="drvtxt" style="font-size:13px">GPU</text>
+    <path d="M220 386 H508" stroke="#3DD6F5" stroke-width="2.5" class="glow"/>
+    <rect x="340" y="346" width="70" height="10" rx="3" fill="#2B323C"/><rect x="460" y="346" width="40" height="10" rx="3" fill="#2B323C"/>
+  </g>
+
+  <g class="hot" data-id="sonido">
+    <rect x="200" y="404" width="14" height="46" rx="2" fill="#A3ACB8"/>
+    <circle cx="207" cy="414" r="3.6" fill="#47B86A"/><circle cx="207" cy="426" r="3.6" fill="#E57AA6"/><circle cx="207" cy="438" r="3.6" fill="#5AA9E6"/>
+    <rect x="214" y="410" width="160" height="36" rx="3" fill="#1E7A43" stroke="#0F4F2A"/>
+    <rect x="270" y="417" width="22" height="22" rx="2" fill="#14171B"/>
+    <rect x="300" y="420" width="10" height="7" rx="1" fill="#C9A227"/><rect x="316" y="420" width="10" height="7" rx="1" fill="#C9A227"/><circle cx="345" cy="428" r="6" fill="#2C66C9"/><circle cx="240" cy="428" r="5" fill="#D9DEE5"/>
+  </g>
+
+  <g class="hot" data-id="red">
+    <path d="M207 470 C 200 450, 186 430, 176 412" fill="none" stroke="#1B1F25" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="176" cy="410" r="4" fill="#1B1F25"/>
+    <rect x="200" y="462" width="14" height="40" rx="2" fill="#A3ACB8"/>
+    <rect x="202" y="484" width="10" height="11" rx="1.5" fill="#1B1F25"/>
+    <rect x="214" y="466" width="170" height="32" rx="3" fill="#1E6F4A" stroke="#0F4F2A"/>
+    <rect x="290" y="472" width="20" height="20" rx="2" fill="#14171B"/>
+    <rect x="236" y="476" width="30" height="12" rx="2" fill="#C3CAD3"/>
+    <path d="M330 476h40M330 484h28" stroke="#5FC79A" stroke-width="2" opacity=".6"/>
+    <path d="M166 398 a14 14 0 0 1 20 0 M160 391 a22 22 0 0 1 32 0" fill="none" stroke="#3DD6F5" stroke-width="2.4" stroke-linecap="round" class="glow"/>
+  </g>
+
+  <g class="hot" data-id="almacenamiento">
+    <path d="M520 470 C 545 470, 545 300, 568 290" fill="none" stroke="#E84B3C" stroke-width="3"/>
+    <path d="M520 460 C 540 440, 540 230, 568 220" fill="none" stroke="#E2722B" stroke-width="3"/>
+    <rect x="568" y="200" width="140" height="38" rx="5" fill="#2E3644" stroke="#4A5563"/>
+    <rect x="578" y="208" width="58" height="22" rx="2" fill="#7B5CF0"/>
+    <text x="672" y="224" class="drvtxt">SSD</text>
+    <rect x="566" y="250" width="150" height="76" rx="6" fill="url(#gHdd4)" stroke="#6E7884"/>
+    <circle cx="606" cy="288" r="26" fill="none" stroke="#6E7884" stroke-width="1.5"/><circle cx="606" cy="288" r="5" fill="#6E7884"/>
+    <rect x="640" y="262" width="68" height="52" rx="3" fill="#F2F3F5"/>
+    <text x="674" y="285" class="drvtxt dk">HDD</text>
+    <text x="674" y="301" class="drvtxt dk" style="font-size:10px;font-weight:500">1 TB</text>
+  </g>
+
+  <g class="hot" data-id="ventilador">
+    <ellipse cx="290" cy="262" rx="58" ry="10" fill="#000" opacity=".25"/>
+    <rect x="232" y="142" width="108" height="108" rx="10" fill="url(#gSink)" stroke="#4A5562"/>
+    <path d="M240 152v88M250 152v88M260 152v88M312 152v88M322 152v88M332 152v88" stroke="#4A5562" stroke-width="2"/>
+    <circle cx="286" cy="196" r="47" fill="#14181D" stroke="#2B323B" stroke-width="2"/>
+    <g class="spin">${[0,60,120,180,240,300].map(a=>`<path d="M286 196 C 292 176, 304 166, 320 168 C 310 182, 300 190, 286 196Z" fill="#3A434F" transform="rotate(${a} 286 196)"/>`).join('')}</g>
+    <circle cx="286" cy="196" r="14" fill="#2F6FE0"/>
+    <path d="M340 250 L352 262" stroke="#B48CFF" stroke-width="2" stroke-dasharray="4 4"/>
+  </g>
+  </svg>`;
+}
+
+/* ---------- Escena 5: sistemas operativos ---------- */
+function sceneSO(){
+  const osCard=(id,i,col,icon,name,s1,s2)=>{const x=376+i*124; return `<g class="hot" data-id="${id}">
+    <rect x="${x}" y="340" width="112" height="186" rx="14" class="sc-sub"/>
+    <rect x="${x+28}" y="358" width="56" height="56" rx="15" fill="${col}"/>
+    <g transform="translate(${x+38} 368) scale(.75)" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">${IC[icon]}</g>
+    <text x="${x+56}" y="448" class="sc-n">${name}</text>
+    <text x="${x+56}" y="472" class="sc-s">${s1}</text><text x="${x+56}" y="489" class="sc-s">${s2}</text></g>`};
+  const rows=['Administra el hardware','Gestiona archivos y carpetas','Ejecuta los programas','Controla la seguridad','Da una interfaz de usuario'];
+  return `<svg class="scene" viewBox="0 0 900 560" role="img" aria-label="Esquema de un sistema operativo entre el usuario y el hardware, sus funciones, sus tipos y los sistemas operativos más comunes">
+  <g class="hot" data-id="que">
+    <rect x="30" y="28" width="300" height="334" rx="18" class="sc-card"/>
+    <text x="54" y="60" class="sc-h">¿QUÉ ES?</text>
+    <rect x="70" y="78" width="220" height="54" rx="14" fill="#2F7BE8"/>
+    <g transform="translate(92 89) scale(.66)" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><circle cx="24" cy="15" r="8"/><path d="M8 42c2-9 8-14 16-14s14 5 16 14"/></g>
+    <text x="134" y="112" class="sc-bt">Usuario</text>
+    <path d="M180 140v28M172 148l8-8 8 8M172 160l8 8 8-8" fill="none" class="sc-arrow"/>
+    <rect x="70" y="174" width="220" height="68" rx="14" fill="#1E9A57"/>
+    <g transform="translate(90 190) scale(.75)" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round">${IC.engrane}</g>
+    <text x="134" y="203" class="sc-bt">Sistema</text><text x="134" y="226" class="sc-bt">operativo</text>
+    <path d="M180 250v28M172 258l8-8 8 8M172 270l8 8 8-8" fill="none" class="sc-arrow"/>
+    <rect x="70" y="284" width="220" height="54" rx="14" fill="#7B4FD6"/>
+    <g transform="translate(92 295) scale(.66)" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round">${IC.procesador}</g>
+    <text x="134" y="318" class="sc-bt">Hardware</text>
+    <circle cx="180" cy="154" r="4" fill="#4FCB8E" class="blink"/><circle cx="180" cy="264" r="4" fill="#4FCB8E" class="blink" style="animation-delay:.8s"/>
+  </g>
+  <g class="hot" data-id="funciones">
+    <rect x="30" y="378" width="300" height="160" rx="18" class="sc-card"/>
+    <text x="54" y="408" class="sc-h">FUNCIONES PRINCIPALES</text>
+    ${rows.map((r,i)=>`<circle cx="62" cy="${430+i*22}" r="8" fill="#1E9A57"/><path d="M58 ${430+i*22}l3 3 5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="80" y="${435+i*22}" class="sc-row">${r}</text>`).join('')}
+  </g>
+  <rect x="360" y="28" width="510" height="254" rx="18" class="sc-card"/>
+  <text x="384" y="60" class="sc-h">TIPOS DE SISTEMAS OPERATIVOS</text>
+  <g class="hot" data-id="escritorio">
+    <rect x="384" y="70" width="180" height="200" fill="transparent"/>
+    <rect x="404" y="82" width="140" height="94" rx="8" fill="#1B1F24"/>
+    <rect x="411" y="89" width="126" height="76" rx="3" fill="#2F7BE8"/>
+    <path d="M411 145 C 450 120, 490 160, 537 125 L537 165 L411 165Z" fill="#fff" opacity=".18"/>
+    <path d="M466 176h16l4 22h-24z" fill="#2A3038"/><rect x="444" y="196" width="60" height="7" rx="3.5" fill="#2A3038"/>
+    <text x="474" y="232" class="sc-n">De escritorio</text>
+    <text x="474" y="252" class="sc-s">Computadoras personales</text>
+  </g>
+  <g class="hot" data-id="moviles">
+    <rect x="574" y="70" width="140" height="200" fill="transparent"/>
+    <rect x="618" y="78" width="54" height="120" rx="10" fill="#1B1F24"/>
+    <rect x="623" y="88" width="44" height="98" rx="4" fill="#2FA866"/>
+    <g fill="#fff" opacity=".85"><rect x="628" y="94" width="10" height="10" rx="3"/><rect x="641" y="94" width="10" height="10" rx="3"/><rect x="654" y="94" width="10" height="10" rx="3"/><rect x="628" y="108" width="10" height="10" rx="3"/><rect x="641" y="108" width="10" height="10" rx="3"/></g>
+    <rect x="638" y="191" width="14" height="3" rx="1.5" fill="#555"/>
+    <text x="645" y="232" class="sc-n">Móviles</text>
+    <text x="645" y="252" class="sc-s">Celulares y tabletas</text>
+  </g>
+  <g class="hot" data-id="embebidos">
+    <rect x="724" y="70" width="140" height="200" fill="transparent"/>
+    <path d="M776 112 a18 18 0 0 1 26 0 M768 104 a30 30 0 0 1 42 0 M760 96 a42 42 0 0 1 58 0" fill="none" stroke="#E2A21A" stroke-width="3" stroke-linecap="round" class="glow"/>
+    <path d="M752 162 L744 124 M826 162 L834 124" stroke="#1B1F24" stroke-width="5" stroke-linecap="round"/>
+    <rect x="736" y="158" width="106" height="34" rx="8" fill="#1B1F24"/>
+    <circle cx="756" cy="175" r="3" fill="#4FCB8E" class="blink"/><circle cx="770" cy="175" r="3" fill="#4FCB8E"/><circle cx="784" cy="175" r="3" fill="#E2A21A" class="blink b2"/>
+    <text x="789" y="232" class="sc-n">Embebidos</text>
+    <text x="789" y="252" class="sc-s">Smart TV, routers…</text>
+  </g>
+  <rect x="360" y="296" width="510" height="242" rx="18" class="sc-card"/>
+  <text x="384" y="326" class="sc-h">LOS MÁS COMUNES</text>
+  ${osCard('windows',0,'#2F6FE0','so','Windows','Muy usado en','computadoras')}
+  ${osCard('macos',1,'#5F6B7A','laptop','macOS','Común en','equipos Apple')}
+  ${osCard('linux',2,'#D99A12','terminal','Linux','Flexible y','personalizable')}
+  ${osCard('android',3,'#3DA35D','celular','Android','En la mayoría','de los móviles')}
+  </svg>`;
+}
+
+/* ---------- Escena 6: escritorio de Windows 11 ---------- */
+function sceneDesk(){
+  const dicon=(y,inner,l1,l2)=>`${inner}<text x="128" y="${y}" class="dsk-l">${l1}</text>${l2?`<text x="128" y="${y+15}" class="dsk-l">${l2}</text>`:''}`;
+  return `<svg class="scene" viewBox="0 0 900 560" role="img" aria-label="Escritorio de Windows 11 con íconos, fondo, una ventana abierta, botón de inicio, cuadro de búsqueda, barra de tareas y área de notificación">
+  <defs>
+    <linearGradient id="gWall" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D6E8FF"/><stop offset=".5" stop-color="#7DB2FA"/><stop offset="1" stop-color="#2557C9"/></linearGradient>
+    <linearGradient id="gWave1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#1E40AF"/></linearGradient>
+    <linearGradient id="gEdge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34D3C0"/><stop offset="1" stop-color="#1E6FE0"/></linearGradient>
+    <filter id="wsh" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0B1B3A" flood-opacity=".3"/></filter>
+  </defs>
+  <path d="M420 472h60l14 54h-88z" fill="#22272E"/>
+  <rect x="340" y="522" width="220" height="14" rx="7" fill="#2A3038"/>
+  <ellipse cx="450" cy="545" rx="140" ry="6" fill="#000" opacity=".15"/>
+  <rect x="60" y="14" width="780" height="462" rx="16" fill="#1B1F24" stroke="#3B4452" stroke-width="1.5"/>
+  <g class="hot" data-id="fondo">
+    <rect x="76" y="30" width="748" height="430" rx="3" fill="url(#gWall)"/>
+    <path d="M76 300 C 260 220, 420 380, 620 280 S 800 220, 824 240 L824 460 L76 460Z" fill="url(#gWave1)" opacity=".55"/>
+    <path d="M76 360 C 240 300, 460 430, 640 350 S 790 320, 824 330 L824 460 L76 460Z" fill="#1E3A8A" opacity=".45"/>
+    <path d="M300 30 C 380 120, 560 90, 700 200 S 800 300, 824 280 L824 30Z" fill="#fff" opacity=".12"/>
+    <g class="shine"><path d="M420 30 L480 30 L360 460 L300 460Z" fill="#fff" opacity=".12"/></g>
+  </g>
+  <g class="hot" data-id="iconos">
+    <rect x="86" y="40" width="84" height="270" rx="8" fill="transparent"/>
+    ${dicon(102,`<path d="M114 52h28l-3 34h-22z" fill="#E8EEF6" stroke="#9AA9BC"/><rect x="110" y="48" width="36" height="5" rx="2" fill="#C9D3E0"/><path d="M122 62l6 8M134 62l-6 8M128 74v6" stroke="#2F7BE8" stroke-width="2" stroke-linecap="round"/>`,'Papelera de','reciclaje')}
+    ${dicon(196,`<circle cx="128" cy="160" r="20" fill="url(#gEdge)"/><path d="M114 164 c 4 -14 26 -16 30 -2 c -8 -4 -18 -2 -18 6 c 0 6 8 8 14 6" fill="none" stroke="#fff" stroke-width="2.5" opacity=".9"/>`,'Microsoft Edge','')}
+    ${dicon(276,`<path d="M108 232h14l5 5h21v28h-40z" fill="#F2B33D"/><path d="M108 242h40v23h-40z" fill="#F7C756"/>`,'Documentos','')}
+  </g>
+  <g class="hot" data-id="ventanas">
+    <rect x="430" y="56" width="362" height="252" rx="9" fill="#FBFCFE" stroke="#C9D3E0" filter="url(#wsh)"/>
+    <path d="M439 56h344a9 9 0 0 1 9 9v25H430V65a9 9 0 0 1 9-9z" fill="#EEF2F8"/>
+    <path d="M444 66h10l3 3h11v12h-24z" fill="#F2B33D"/>
+    <text x="476" y="78" class="dsk-w">Documentos</text>
+    <path d="M708 73h12" stroke="#3A4350" stroke-width="1.6"/>
+    <rect x="736" y="67" width="11" height="11" rx="1.5" fill="none" stroke="#3A4350" stroke-width="1.6"/>
+    <path d="M764 67l11 11M775 67l-11 11" stroke="#3A4350" stroke-width="1.6"/>
+    <rect x="430" y="90" width="104" height="218" fill="#F3F6FA"/>
+    <path d="M444 108h70M444 126h56M444 144h64M444 162h50M444 180h60" stroke="#B9C4D2" stroke-width="5" stroke-linecap="round"/>
+    <rect x="548" y="100" width="230" height="16" rx="8" fill="#EEF2F8"/>
+    ${[[556,132],[626,132],[696,132],[556,212],[626,212]].map(([x,y],i)=> i<4 ? `<path d="M${x} ${y}h18l6 6h26v40h-50z" fill="#F2B33D"/><path d="M${x} ${y+14}h50v32h-50z" fill="#F7C756"/>` : `<path d="M${x+8} ${y}h26l10 10v36h-36z" fill="#5B8DEF"/>`).join('')}
+  </g>
+  <g class="hot" data-id="barra">
+    <rect x="76" y="412" width="748" height="48" fill="#1E2633" opacity=".94"/>
+    <path d="M492 424h14l4 4h14v18h-32z" fill="#F2B33D"/>
+    <circle cx="560" cy="436" r="12" fill="url(#gEdge)"/>
+    <rect x="586" y="424" width="24" height="24" rx="5" fill="#5B8DEF"/><path d="M592 432h12v10h-12z" fill="none" stroke="#fff" stroke-width="1.6"/>
+    <path d="M500 455h16M554 455h12" stroke="#9FD0FF" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g class="hot" data-id="inicio">
+    <rect x="326" y="418" width="38" height="36" rx="7" fill="#2C3646"/>
+    <g fill="#4DA3FF">${[0,1,2].map(r=>[0,1,2].map(c=>`<circle cx="${335+c*10}" cy="${426+r*10}" r="2.6"/>`).join('')).join('')}</g>
+  </g>
+  <g class="hot" data-id="busqueda">
+    <rect x="372" y="421" width="108" height="30" rx="15" fill="#2C3646" stroke="#3E4A5D"/>
+    <circle cx="390" cy="434" r="6" fill="none" stroke="#DCE6F2" stroke-width="2"/><path d="M394 438l5 5" stroke="#DCE6F2" stroke-width="2" stroke-linecap="round"/>
+    <text x="406" y="440" class="dsk-t">Buscar</text>
+  </g>
+  <g class="hot" data-id="notificacion">
+    <rect x="640" y="418" width="180" height="36" rx="7" fill="#2C3646" opacity=".6"/>
+    <path d="M652 440l5-5 5 5" fill="none" stroke="#DCE6F2" stroke-width="2" stroke-linecap="round"/>
+    <path d="M672 432a12 12 0 0 1 16 0M675 436a7 7 0 0 1 10 0" fill="none" stroke="#DCE6F2" stroke-width="2" stroke-linecap="round"/><circle cx="680" cy="440" r="1.8" fill="#DCE6F2"/>
+    <path d="M698 432h4l5-4v14l-5-4h-4z" fill="#DCE6F2"/><path d="M711 432c2 2 2 6 0 8" fill="none" stroke="#DCE6F2" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="722" y="430" width="18" height="10" rx="2" fill="none" stroke="#DCE6F2" stroke-width="1.8"/><rect x="724" y="432" width="11" height="6" fill="#4FCB8E"/><rect x="740.5" y="433" width="2" height="4" fill="#DCE6F2"/>
+    <text x="812" y="432" class="dsk-c" id="dsk-time">10:24 a. m.</text>
+    <text x="812" y="447" class="dsk-c" id="dsk-date">08/06/2025</text>
+  </g>
+  </svg>`;
+}
+function updClock(){
+  const t=document.getElementById('dsk-time'), dd=document.getElementById('dsk-date'); if(!t) return;
+  const d=new Date(); let h=d.getHours(); const ap=h<12?'a. m.':'p. m.'; h=h%12||12;
+  t.textContent=`${h}:${String(d.getMinutes()).padStart(2,'0')} ${ap}`;
+  dd.textContent=`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+}
+setInterval(updClock, 20000);
+
+/* ---------- Contenido de los temas nuevos ---------- */
+const NEW_VIEWS = {
+  componentes:{
+    menu:'Componentes internos', menuSub:'Todas las piezas del gabinete', icon:'gabinete', accentVar:'--acc-componentes',
+    eyebrow:'Tema 3 · Hardware interno', title:'Componentes internos de un equipo de cómputo',
+    lead:'Cada pieza trabaja en conjunto para que tu computadora funcione. Toca cada componente del gabinete abierto para conocerlo.',
+    scene:sceneComponentes, vb:[900,580],
+    pins:{fuente:[300,40], ventilador:[262,134], cpu:[372,314], ram:[461,138], madre:[522,406,'ar'], gpu:[300,362], sonido:[382,428,'al'], red:[392,482,'al'], almacenamiento:[641,186], gabinete:[641,530]},
+    items:[
+      {id:'fuente', name:'Fuente de poder', color:'#E2A21A', icon:'fuente', kind:'Energía',
+        lead:'Convierte la corriente eléctrica en la energía que necesitan todos los componentes.',
+        funcs:['Recibir la corriente de la toma de pared','Convertirla al voltaje que usa cada pieza','Repartir la energía con sus cables'],
+        ejemplo:'Al presionar el botón de encendido, la fuente empieza a mandar energía a la tarjeta madre, al procesador, a la tarjeta gráfica y a los discos.',
+        more:['La toma de pared da <b>corriente alterna de 127 V</b>. La fuente la convierte en <b>corriente directa</b> de 12 V, 5 V y 3.3 V.','Su potencia se mide en <b>watts (W)</b>. Un equipo con tarjeta gráfica potente necesita una fuente de más watts.','Tiene su propio ventilador para no calentarse.','En la escuela también la vas a escuchar como <b>fuente de alimentación</b>.'],
+        facts:[['127 V → 12 V','Convierte el voltaje'],['450–850 W','Potencia común'],['CA → CD','Tipo de corriente']]},
+      {id:'cpu', name:'Procesador (CPU)', color:'#7A3FC2', icon:'procesador', kind:'Procesa',
+        lead:'Es el cerebro del equipo. Ejecuta las instrucciones de los programas y procesa la información.',
+        funcs:['Ejecutar las instrucciones de los programas','Hacer cálculos','Decidir el orden de las tareas'],
+        ejemplo:'Cuando sumas una columna en Excel, el procesador hace la operación en una fracción de segundo.',
+        more:['CPU significa <b>Unidad Central de Procesamiento</b>.','Su velocidad se mide en <b>gigahertz (GHz)</b> y tiene varios <b>núcleos</b> para trabajar en varias tareas a la vez.','Se instala en el <b>socket</b> de la tarjeta madre y encima lleva el disipador con su ventilador.','Las marcas más conocidas son Intel y AMD.'],
+        facts:[['3–5 GHz','Velocidad común'],['4 a 16','Núcleos'],['Socket','Donde se instala']]},
+      {id:'ventilador', name:'Ventilador y disipador de calor', color:'#2F7BE8', icon:'ventilador', kind:'Enfriamiento',
+        lead:'Mantiene la temperatura del procesador en un nivel seguro.',
+        funcs:['El disipador absorbe el calor del procesador','El ventilador mueve aire para sacar ese calor','Evitar que el equipo se ponga lento o se apague por sobrecalentamiento'],
+        ejemplo:'Cuando juegas o editas video, el procesador trabaja más, se calienta y el ventilador gira más rápido (por eso suena más).',
+        more:['El <b>disipador</b> es una pieza de metal (aluminio o cobre) con muchas aletas; entre más aletas, más superficie para soltar el calor.','Entre el procesador y el disipador se pone <b>pasta térmica</b>, que ayuda a pasar el calor.','En la imagen se ve levantado para que puedas ver el procesador. En la computadora real va <b>justo encima</b> de él.','El polvo tapa las aletas y el ventilador: limpiar el equipo ayuda a que no se caliente.'],
+        facts:[['Aluminio','o cobre'],['Pasta térmica','Une CPU y disipador'],['Polvo','= más calor']]},
+      {id:'ram', name:'Memoria RAM', color:'#1E8A4C', icon:'ram', kind:'Memoria temporal',
+        lead:'Guarda temporalmente los datos y programas que se están utilizando para un acceso rápido.',
+        funcs:['Tener a la mano lo que estás usando','Dar acceso rápido al procesador','Borrarse al apagar el equipo'],
+        ejemplo:'Si tienes abiertos Chrome, Word y música al mismo tiempo, los tres están cargados en la RAM.',
+        more:['RAM significa <b>Memoria de Acceso Aleatorio</b>.','Se mide en <b>gigabytes (GB)</b>; hoy lo común es tener de 8 a 16 GB.','Los módulos se colocan en las <b>ranuras</b> de la tarjeta madre, junto al procesador.','Las generaciones actuales se llaman DDR4 y DDR5.'],
+        facts:[['8–16 GB','RAM común'],['DDR5','Generación actual'],['Volátil','Se borra al apagar']]},
+      {id:'almacenamiento', name:'Almacenamiento', color:'#D63A3A', icon:'disco', kind:'Disco duro / SSD',
+        lead:'Guarda el sistema operativo, los programas y tus archivos.',
+        funcs:['Guardar la información de forma permanente','Conservarla aunque apagues el equipo'],
+        ejemplo:'Windows, tus juegos instalados y las fotos de tu celular que pasaste a la computadora están en el almacenamiento.',
+        more:['Hay SSD que no se ven como caja: se atornillan directo a la tarjeta madre (se llaman <b>M.2</b>).','Su capacidad se mide en GB o TB (1 TB son unos 1000 GB).'],
+        extra:'hddssd', facts:[['1 TB','≈ 1000 GB'],['HDD','Discos que giran'],['SSD','Chips, más rápido']]},
+      {id:'gpu', name:'Tarjeta gráfica (GPU)', color:'#0E8A9C', icon:'gpu', kind:'Gráficos y video',
+        lead:'Procesa los gráficos y video. Es clave para juegos, edición y diseño.',
+        funcs:['Crear las imágenes que ves en el monitor','Mover los gráficos 3D de los videojuegos','Acelerar la edición de video y el diseño'],
+        ejemplo:'En un videojuego, la tarjeta gráfica dibuja cada escena muchas veces por segundo para que el movimiento se vea fluido.',
+        more:['GPU significa <b>Unidad de Procesamiento Gráfico</b>.','Tiene su propia memoria, llamada <b>VRAM</b>, y sus propios ventiladores.','Se conecta en una ranura larga de la tarjeta madre llamada <b>PCI Express</b>, y el monitor se conecta a sus puertos HDMI o DisplayPort.','Muchas computadoras no tienen tarjeta aparte: usan gráficos <b>integrados</b> en el procesador, suficientes para tareas escolares.'],
+        facts:[['VRAM','Su memoria propia'],['PCIe','Ranura donde va'],['FPS','Cuadros por segundo']]},
+      {id:'madre', name:'Tarjeta madre (Motherboard)', color:'#E2722B', icon:'placa', kind:'Conecta',
+        lead:'Conecta todos los componentes y permite que se comuniquen entre sí.',
+        funcs:['Conectar todas las piezas','Llevar los datos de un componente a otro','Repartir la energía de la fuente'],
+        ejemplo:'El procesador, la RAM, la tarjeta gráfica y los discos se comunican a través de la tarjeta madre.',
+        more:['También se le llama <b>placa base</b> o <b>placa madre</b>.','Tiene el socket del procesador, las ranuras de RAM, las ranuras PCI Express para tarjetas y los conectores de los discos.','Las líneas que la recorren son caminos de cobre por donde viajan los datos.','Muchas ya traen integrados el sonido y la red.']},
+      {id:'sonido', name:'Tarjeta de sonido', color:'#D63384', icon:'sonido', kind:'Audio',
+        lead:'Procesa el audio y permite la salida de sonido a tus bocinas o audífonos.',
+        funcs:['Convertir el sonido digital en la señal que mueven las bocinas','Recibir el sonido del micrófono','Mejorar la calidad del audio'],
+        ejemplo:'Cuando ves un video, la tarjeta de sonido manda el audio a tus audífonos.',
+        more:['Los conectores tienen colores: <b>verde</b> para bocinas o audífonos, <b>rosa</b> para micrófono y <b>azul</b> para entrada de línea.','La mayoría de las tarjetas madre ya traen sonido integrado; una tarjeta aparte se usa para música o grabación profesional.']},
+      {id:'red', name:'Tarjeta de red (Wi-Fi / Ethernet)', color:'#2563EB', icon:'red', kind:'Conexión',
+        lead:'Permite la conexión a internet y a redes locales.',
+        funcs:['Conectar el equipo a internet','Comunicarse con otras computadoras de la red local','Enviar y recibir datos'],
+        ejemplo:'La computadora del aula se conecta a internet por cable o por el Wi-Fi de la escuela gracias a su tarjeta de red.',
+        more:['<b>Ethernet</b> usa un cable con conector RJ-45; es estable y rápido.','<b>Wi-Fi</b> usa ondas de radio, por eso la tarjeta lleva antenas.','Una <b>red local (LAN)</b> une equipos cercanos, como los del laboratorio de cómputo.','Cada tarjeta tiene un número único llamado <b>dirección MAC</b>.']},
+      {id:'gabinete', name:'Gabinete', color:'#5B4BD6', icon:'gabinete', kind:'Protección',
+        lead:'Protege y organiza todos los componentes internos.',
+        funcs:['Proteger las piezas del polvo y los golpes','Sostener y ordenar los componentes','Ayudar a que circule el aire'],
+        ejemplo:'Por fuera ves el botón de encendido y los puertos USB; por dentro sostiene la tarjeta madre, la fuente y los discos.',
+        more:['También se le llama <b>torre</b> o <b>case</b>. Coloquialmente mucha gente le dice “CPU”.','Hay de varios tamaños: torre completa, media torre y mini torre.','Tiene ventiladores y rejillas para que entre aire fresco y salga el caliente.'],
+        rel:[['partes','cpu','Ver el gabinete por fuera']]}
+    ],
+    quiz:{fuente:'la pieza que convierte la corriente en energía para todos', cpu:'el cerebro que ejecuta las instrucciones', ventilador:'lo que mantiene fresco al procesador', ram:'la memoria temporal de acceso rápido', almacenamiento:'donde se guardan el sistema operativo y tus archivos', gpu:'la tarjeta que procesa gráficos y video', madre:'la tarjeta que conecta todos los componentes', sonido:'la tarjeta que manda el audio a tus bocinas', red:'la tarjeta que conecta a internet por Wi-Fi o cable', gabinete:'la caja que protege y organiza todo'},
+    summary(){ const t=(id)=>tagFor('componentes',id); return `
+      <div class="sbox"><h3>Agrúpalos por lo que hacen</h3><div class="groups">
+        <div class="grp"><b>Procesan</b><div class="tags">${t('cpu')}${t('gpu')}</div></div>
+        <div class="grp"><b>Almacenan</b><div class="tags">${t('ram')}${t('almacenamiento')}</div></div>
+        <div class="grp"><b>Conectan</b><div class="tags">${t('madre')}${t('red')}${t('sonido')}</div></div>
+        <div class="grp"><b>Cuidan</b><div class="tags">${t('fuente')}${t('ventilador')}${t('gabinete')}</div></div>
+      </div></div>
+      <div class="sbox"><h3>¿Dónde se conecta cada uno?</h3><ul class="ticks">
+        <li>${TICK}<span>El procesador va en el <b>socket</b>.</span></li>
+        <li>${TICK}<span>La RAM va en sus <b>ranuras</b>, junto al procesador.</span></li>
+        <li>${TICK}<span>Las tarjetas gráfica, de sonido y de red van en ranuras <b>PCI Express</b>.</span></li>
+        <li>${TICK}<span>Los discos se conectan con cables <b>SATA</b> o directo (M.2).</span></li>
+        <li>${TICK}<span>La fuente alimenta a todos con sus cables.</span></li></ul></div>
+      <div class="sbox"><h3>En resumen</h3><p class="big-note">Los componentes internos trabajan juntos para que tu equipo pueda procesar, almacenar y mostrar la información.</p></div>`; }
+  },
+  sistemas:{
+    menu:'Sistemas operativos', menuSub:'El corazón del dispositivo', icon:'capas', accentVar:'--acc-sistemas',
+    eyebrow:'Tema 5 · Software de sistema', title:'Sistemas operativos',
+    lead:'El corazón de tu dispositivo. Sin un sistema operativo, tu computadora, celular o tablet no podría funcionar. Toca cada parte del esquema.',
+    scene:sceneSO, vb:[900,560], pins:{},
+    items:[
+      {id:'que', name:'¿Qué es un sistema operativo?', color:'#1E9A57', icon:'capas', kind:'Intermediario',
+        lead:'Un sistema operativo (SO) es un software que administra los recursos del dispositivo y permite que otros programas funcionen.',
+        funcs:['Actuar como intermediario entre el usuario y el hardware','Administrar los recursos del dispositivo','Permitir que otros programas funcionen'],
+        ejemplo:'Das clic en “Imprimir”: el sistema operativo recibe tu orden y se la pasa a la impresora, usando su controlador.',
+        more:['Tú (el <b>usuario</b>) das órdenes con el mouse, el teclado o la pantalla táctil.','El <b>sistema operativo</b> las traduce y decide qué hace cada pieza.','El <b>hardware</b> realiza el trabajo y el resultado regresa a ti por la pantalla o las bocinas.','Sin un sistema operativo, tu computadora, celular o tablet no podría funcionar.']},
+      {id:'funciones', name:'Funciones principales', color:'#0E8A86', icon:'lista', kind:'Lo que hace',
+        lead:'El sistema operativo se encarga de cinco tareas principales.',
+        funcs:['Administra el hardware (memoria, procesador, dispositivos)','Gestiona los archivos y carpetas','Permite la ejecución de programas','Controla la seguridad del equipo','Brinda una interfaz de usuario (gráfica o de texto)'],
+        ejemplo:'Cuando guardas tu tarea, el sistema operativo decide en qué parte del disco va y la pone en la carpeta que elegiste.',
+        more:['<b>Hardware:</b> reparte la memoria y el tiempo del procesador entre los programas abiertos.','<b>Archivos:</b> te deja crear, copiar, mover, renombrar y borrar carpetas y archivos.','<b>Programas:</b> los abre, los cierra y evita que uno bloquee a los demás.','<b>Seguridad:</b> usa contraseñas, cuentas de usuario y actualizaciones.','<b>Interfaz:</b> puede ser gráfica (ventanas, íconos, mouse) o de texto (escribiendo comandos).']},
+      {id:'escritorio', name:'Sistemas de escritorio', color:'#2F7BE8', icon:'monitor', kind:'Tipo de sistema operativo',
+        lead:'Son los sistemas operativos para computadoras personales.',
+        funcs:['Manejar ventanas, teclado y mouse','Instalar programas grandes como Word o editores de video','Administrar varios usuarios'],
+        ejemplo:'La computadora del laboratorio de cómputo usa un sistema operativo de escritorio.',
+        more:['Los más conocidos son <b>Windows</b>, <b>macOS</b> y <b>Linux</b>.','También existe ChromeOS, que usan las Chromebook.']},
+      {id:'moviles', name:'Sistemas móviles', color:'#2FA866', icon:'celular', kind:'Tipo de sistema operativo',
+        lead:'Son los sistemas operativos para smartphones y tabletas.',
+        funcs:['Funcionar con pantalla táctil','Cuidar la batería','Instalar aplicaciones desde una tienda'],
+        ejemplo:'Tu celular usa un sistema móvil para abrir WhatsApp, la cámara o tus juegos.',
+        more:['Los principales son <b>Android</b> (muchas marcas) e <b>iOS</b> (solo iPhone).','Las aplicaciones se descargan de tiendas como Google Play o App Store.']},
+      {id:'embebidos', name:'Sistemas embebidos', color:'#D99A12', icon:'router', kind:'Tipo de sistema operativo',
+        lead:'Son sistemas operativos para dispositivos específicos, como televisores inteligentes, routers, etc.',
+        funcs:['Hacer una tarea concreta','Funcionar sin que lo notes','Usar pocos recursos'],
+        ejemplo:'El router de tu casa tiene un sistema embebido que reparte el internet por Wi-Fi.',
+        more:['Están dentro de muchos aparatos: televisores, relojes inteligentes, lavadoras, autos, cajeros automáticos y consolas.','Normalmente no puedes instalarles cualquier programa: vienen preparados para su función.']},
+      {id:'windows', name:'Windows', color:'#2F6FE0', icon:'so', kind:'Sistema operativo de escritorio',
+        lead:'Muy usado en computadoras.',
+        funcs:['Manejar el escritorio, las ventanas y la barra de tareas','Ejecutar la mayoría de los programas y juegos de PC'],
+        ejemplo:'Las computadoras de la escuela y de muchas oficinas usan Windows.',
+        more:['Lo hace la empresa <b>Microsoft</b>.','La versión actual es <b>Windows 11</b>.','Es el sistema operativo de escritorio más usado en el mundo.'],
+        rel:[['escritorio','Ver las partes del escritorio de Windows 11']]},
+      {id:'macos', name:'macOS', color:'#5F6B7A', icon:'laptop', kind:'Sistema operativo de escritorio',
+        lead:'Común en equipos Apple.',
+        funcs:['Funcionar en las computadoras Mac','Conectarse fácilmente con iPhone y iPad'],
+        ejemplo:'Muchos diseñadores y editores de video usan Mac con macOS.',
+        more:['Lo hace la empresa <b>Apple</b>.','Solo viene instalado en computadoras Apple (MacBook, iMac).']},
+      {id:'linux', name:'Linux', color:'#D99A12', icon:'terminal', kind:'Sistema operativo de escritorio',
+        lead:'Flexible y personalizable.',
+        funcs:['Funcionar en computadoras de casi cualquier marca','Adaptarse a lo que necesite cada usuario'],
+        ejemplo:'La mayoría de los servidores de internet, que guardan las páginas web, funcionan con Linux.',
+        more:['Es <b>gratuito</b> y de <b>código abierto</b>: cualquiera puede estudiarlo y mejorarlo.','Tiene muchas versiones llamadas <b>distribuciones</b>, como Ubuntu o Linux Mint.','Android está construido sobre Linux.']},
+      {id:'android', name:'Android', color:'#3DA35D', icon:'celular', kind:'Sistema operativo móvil',
+        lead:'En la mayoría de los dispositivos móviles.',
+        funcs:['Manejar celulares y tabletas de muchas marcas','Instalar aplicaciones desde Google Play'],
+        ejemplo:'Si tu celular no es iPhone, lo más probable es que use Android.',
+        more:['Lo desarrolla <b>Google</b>.','Es el sistema operativo más usado del mundo si contamos todos los dispositivos.','En los iPhone se usa otro sistema: <b>iOS</b>, de Apple.']}
+    ],
+    quiz:{que:'el esquema Usuario – Sistema operativo – Hardware', funciones:'la lista de lo que hace un sistema operativo', escritorio:'el tipo de SO para computadoras personales', moviles:'el tipo de SO para celulares y tabletas', embebidos:'el tipo de SO de televisores inteligentes y routers', windows:'el SO muy usado en computadoras', macos:'el SO de los equipos Apple', linux:'el SO gratuito, flexible y personalizable', android:'el SO de la mayoría de los celulares'},
+    summary(){ const t=(id)=>tagFor('sistemas',id); return `
+      <div class="sbox"><h3>Ejemplos de uso</h3><ul class="ticks">
+        <li>${TICK}<span>Navegar en internet.</span></li>
+        <li>${TICK}<span>Crear y editar documentos.</span></li>
+        <li>${TICK}<span>Jugar videojuegos.</span></li>
+        <li>${TICK}<span>Ver videos y escuchar música.</span></li></ul>
+        <p class="tr-msg">Todo eso es posible porque el sistema operativo hace funcionar el equipo y los programas.</p></div>
+      <div class="sbox"><h3>Dato importante</h3><p>Cada sistema operativo tiene su propio diseño, ventajas y características. La elección depende del uso que le quieras dar a tu dispositivo.</p><div class="tags">${t('windows')}${t('macos')}${t('linux')}${t('android')}</div></div>
+      <div class="sbox"><h3>En resumen</h3><p>El sistema operativo <b>hace posible</b> que tu equipo funcione, te permita trabajar, comunicarte, aprender y disfrutar de la tecnología.</p><p class="big-note">No solo maneja tu equipo… ¡también abre la puerta a un mundo de posibilidades!</p></div>`; }
+  },
+  escritorio:{
+    menu:'Escritorio de Windows 11', menuSub:'Tu espacio de trabajo', icon:'ventana', accentVar:'--acc-escritorio',
+    eyebrow:'Tema 6 · Windows 11', title:'Partes del escritorio de Windows 11',
+    lead:'Tu espacio de trabajo, organizado y a tu manera. Toca cada parte de la pantalla para saber para qué sirve.',
+    scene:sceneDesk, vb:[900,560],
+    pins:{iconos:[128,322], fondo:[300,370], ventanas:[611,44], inicio:[345,496], busqueda:[426,398], barra:[552,496], notificacion:[730,398]},
+    items:[
+      {id:'iconos', name:'Iconos del escritorio', color:'#E2A21A', icon:'carpeta', kind:'Parte 1',
+        lead:'Son accesos directos a programas, archivos o carpetas. También está la Papelera de reciclaje, donde se eliminan los archivos.',
+        funcs:['Abrir un programa, archivo o carpeta con doble clic','Tener a la mano lo que usas seguido','Llevar a la Papelera lo que ya no necesitas'],
+        ejemplo:'Das doble clic en el icono de Documentos para abrir tus trabajos.',
+        more:['Un <b>acceso directo</b> tiene una flechita en la esquina: solo te lleva al archivo, no es el archivo.','Lo que borras va a la <b>Papelera de reciclaje</b>. Desde ahí puedes <b>restaurarlo</b>; si la vacías, se borra definitivamente.','Puedes ordenar los iconos con clic derecho en el escritorio → Ordenar por.']},
+      {id:'fondo', name:'Fondo de escritorio', color:'#4B4FD6', icon:'imagen', kind:'Parte 2',
+        lead:'Es la imagen que se muestra en el escritorio. Puedes cambiarla por una foto o un color de tu preferencia.',
+        funcs:['Decorar y personalizar tu escritorio','Hacer tu espacio más agradable'],
+        ejemplo:'Pones de fondo una foto de tu mascota o un paisaje.',
+        more:['Para cambiarlo: <b>clic derecho</b> en una parte vacía del escritorio → <b>Personalizar</b> → <b>Fondo</b>.','Puedes elegir una imagen, un color sólido o una presentación de fotos que cambia sola.']},
+      {id:'inicio', name:'Botón de inicio', color:'#16A34A', icon:'inicio', kind:'Parte 3',
+        lead:'Abre el menú de inicio, donde puedes acceder a tus aplicaciones, configuraciones y más.',
+        funcs:['Abrir aplicaciones','Entrar a Configuración','Apagar, reiniciar o suspender el equipo'],
+        ejemplo:'Para apagar bien la computadora: botón de inicio → botón de encendido → Apagar.',
+        more:['En Windows 11 el botón de inicio está en la barra de tareas y lleva el <b>logotipo de Windows</b>.','También se abre con la <b>tecla Windows</b> del teclado.','En el menú de inicio están las aplicaciones <b>ancladas</b> y los archivos recientes.']},
+      {id:'barra', name:'Barra de tareas', color:'#9333EA', icon:'barra', kind:'Parte 4',
+        lead:'Muestra los programas que tienes abiertos y te permite acceder rápidamente a ellos.',
+        funcs:['Ver qué programas están abiertos','Cambiar de un programa a otro con un clic','Anclar los programas que más usas'],
+        ejemplo:'Tienes Word y Chrome abiertos: con un clic en su icono de la barra pasas de uno a otro.',
+        more:['La rayita debajo de un icono indica que ese programa está abierto.','Para <b>anclar</b> un programa: clic derecho en su icono → Anclar a la barra de tareas.','En Windows 11 los iconos aparecen centrados.']},
+      {id:'notificacion', name:'Área de notificación', color:'#EA7A1A', icon:'campana', kind:'Parte 5',
+        lead:'Aquí aparecen los iconos del sistema (internet, sonido, batería, etc.) y la hora y fecha.',
+        funcs:['Ver si hay conexión a internet','Subir o bajar el volumen','Revisar la batería, la hora y la fecha'],
+        ejemplo:'Das clic en el icono de Wi-Fi para conectarte a la red de la escuela.',
+        more:['La flechita <b>^</b> muestra los iconos ocultos de programas que trabajan en segundo plano.','Si das clic en la hora se abren el calendario y las notificaciones.','La hora y la fecha de esta pantalla son las de tu dispositivo, en tiempo real.']},
+      {id:'ventanas', name:'Ventanas', color:'#E5484D', icon:'ventanas', kind:'Parte 6',
+        lead:'Son los cuadros donde se abren los programas y archivos. Puedes moverlas, minimizar, maximizar o cerrarlas.',
+        funcs:['Mover: arrastra la barra de título','Minimizar: la esconde en la barra de tareas','Maximizar: ocupa toda la pantalla','Cerrar: termina el programa o archivo'],
+        ejemplo:'Abres la carpeta Documentos y se muestra en una ventana con sus archivos.',
+        more:['Atajos: <span class="kbd">Alt</span>+<span class="kbd">F4</span> cierra la ventana; <span class="kbd">Win</span>+<span class="kbd">D</span> muestra el escritorio; <span class="kbd">Win</span>+<span class="kbd">←</span> o <span class="kbd">→</span> acomoda la ventana a media pantalla.'],
+        extra:'ventana'},
+      {id:'busqueda', name:'Cuadro de búsqueda', color:'#0E8A86', icon:'lupa', kind:'Parte 7',
+        lead:'Te ayuda a encontrar rápidamente archivos, aplicaciones o información en tu equipo.',
+        funcs:['Encontrar aplicaciones','Buscar archivos por su nombre','Abrir configuraciones'],
+        ejemplo:'Escribes “Paint” y presionas Enter para abrir el programa sin buscarlo en el menú.',
+        more:['También se abre con <span class="kbd">Win</span>+<span class="kbd">S</span>.','Basta con escribir parte del nombre: “calc” encuentra la Calculadora.']}
+    ],
+    quiz:{iconos:'los accesos directos y la Papelera de reciclaje', fondo:'la imagen que puedes cambiar por una foto', inicio:'el botón que abre el menú de aplicaciones y configuración', barra:'la barra que muestra los programas abiertos', notificacion:'donde ves la hora, la fecha, el internet y el sonido', ventanas:'el cuadro donde se abre un programa o archivo', busqueda:'donde escribes para encontrar archivos o aplicaciones'},
+    summary(){ return `
+      <div class="sbox"><h3>Atajos con la tecla Windows</h3><div class="groups">
+        <div class="grp"><b><span class="kbd">Win</span></b><span>Abre el menú de inicio</span></div>
+        <div class="grp"><b><span class="kbd">Win</span>+<span class="kbd">D</span></b><span>Muestra el escritorio</span></div>
+        <div class="grp"><b><span class="kbd">Win</span>+<span class="kbd">S</span></b><span>Abre la búsqueda</span></div>
+        <div class="grp"><b><span class="kbd">Win</span>+<span class="kbd">E</span></b><span>Abre el Explorador de archivos</span></div>
+      </div></div>
+      <div class="sbox"><h3>Las 7 partes</h3><ul class="ticks">
+        <li>${TICK}<span>Iconos del escritorio</span></li><li>${TICK}<span>Fondo de escritorio</span></li><li>${TICK}<span>Botón de inicio</span></li><li>${TICK}<span>Barra de tareas</span></li><li>${TICK}<span>Área de notificación</span></li><li>${TICK}<span>Ventanas</span></li><li>${TICK}<span>Cuadro de búsqueda</span></li></ul></div>
+      <div class="sbox"><h3>¡Tú puedes!</h3><p class="big-note">Conocer las partes del escritorio de Windows 11 te ayuda a usar tu computadora de forma más fácil y eficiente.</p></div>`; }
+  }
+};
+{ const sw=VIEWS.software; delete VIEWS.software;
+  VIEWS.componentes=NEW_VIEWS.componentes; VIEWS.software=sw; VIEWS.sistemas=NEW_VIEWS.sistemas; VIEWS.escritorio=NEW_VIEWS.escritorio;
+  sw.eyebrow='Tema 4 · Software';
+  sw.items[0].rel=[['sistemas','windows','Ver sistemas operativos'],['escritorio','Ver partes del escritorio de Windows 11']];
+  VIEWS.interior.items.find(i=>i.id==='so').rel.push(['sistemas','Ver el tema de sistemas operativos']);
+}
+
+{ const SHORT={partes:{cpu:'CPU'}, interior:{cpu:'CPU',ram:'RAM',placa:'Placa madre',fuente:'Fuente',almacenamiento:'Discos',so:'Sist. operativo',bits:'Bits'}, componentes:{fuente:'Fuente',ventilador:'Ventilador',cpu:'CPU',ram:'RAM',almacenamiento:'Discos',gpu:'GPU',madre:'T. madre',sonido:'Sonido',red:'Red',gabinete:'Gabinete'}, escritorio:{iconos:'Iconos',fondo:'Fondo',ventanas:'Ventanas',inicio:'Inicio',busqueda:'Búsqueda',barra:'Barra',notificacion:'Notificación'}};
+  Object.entries(SHORT).forEach(([v,m])=>VIEWS[v].items.forEach(it=>{ if(m[it.id]) it.short=m[it.id] })); }
 function tagFor(view,id){const it=VIEWS[view].items.find(x=>x.id===id); return `<button class="tag" type="button" data-open="${id}" style="--c:${it.color}"><i></i>${it.name}</button>`}
 
 /* ---------- Bloques extra de las fichas ---------- */
 const EXTRA = {
+  ventana:()=>`<div class="box wide"><h3>Prueba los botones de una ventana</h3><div class="wdemo" id="wdemo"><div class="wwin" id="wwin"><div class="wbar"><span>Mi tarea.docx</span><div class="wbtns"><button type="button" data-a="min" aria-label="Minimizar">–</button><button type="button" data-a="max" aria-label="Maximizar">□</button><button type="button" data-a="close" class="x" aria-label="Cerrar">✕</button></div></div><div class="wbody">Arrastra la barra de título para mover esta ventana.</div></div><div class="wtask"><button type="button" id="wchip" hidden>Mi tarea.docx</button><button type="button" id="wreopen" hidden>Abrir de nuevo</button></div></div><p class="tr-msg" id="wmsg">Toca los botones de la esquina superior derecha: minimizar, maximizar y cerrar.</p></div>`,
   atajos:()=>`<div class="box wide"><h3>Atajos de teclado útiles</h3><div class="kgrid">
     <div><span class="kbd">Ctrl</span>+<span class="kbd">C</span> Copiar</div>
     <div><span class="kbd">Ctrl</span>+<span class="kbd">V</span> Pegar</div>
@@ -867,6 +1463,20 @@ const EXTRA = {
     <div class="tr-out" id="trout"></div><p class="tr-msg" id="trmsg"></p></div>`
 };
 function initExtra(kind){
+  initInv(kind);
+  if(kind==='ventana'){
+    const box=$('#wdemo'), w=$('#wwin'), chip=$('#wchip'), re=$('#wreopen'), msg=$('#wmsg'), bar=w.querySelector('.wbar');
+    w.addEventListener('click',e=>{const b=e.target.closest('[data-a]'); if(!b) return; const a=b.dataset.a;
+      if(a==='min'){w.hidden=true; chip.hidden=false; msg.textContent='Minimizada: sigue abierta, escondida en la barra de tareas. Tócala abajo para regresar.'}
+      if(a==='max'){const m=w.classList.toggle('max'); msg.textContent=m?'Maximizada: ocupa toda la pantalla. Toca □ otra vez para restaurarla.':'Restaurada a su tamaño anterior.'}
+      if(a==='close'){w.hidden=true; chip.hidden=true; re.hidden=false; w.classList.remove('max'); msg.textContent='Cerrada: el archivo ya no está abierto.'}});
+    chip.onclick=()=>{w.hidden=false; chip.hidden=true; msg.textContent='Restaurada desde la barra de tareas.'};
+    re.onclick=()=>{w.hidden=false; re.hidden=true; w.style.left='20px'; w.style.top='16px'; msg.textContent='Abriste la ventana de nuevo.'};
+    let drag=false,sx=0,sy=0,ox=0,oy=0;
+    bar.addEventListener('pointerdown',e=>{if(e.target.closest('button')||w.classList.contains('max'))return; drag=true; bar.setPointerCapture(e.pointerId); sx=e.clientX; sy=e.clientY; ox=w.offsetLeft; oy=w.offsetTop});
+    bar.addEventListener('pointermove',e=>{if(!drag)return; const mx=box.clientWidth-w.offsetWidth, my=box.clientHeight-36-w.offsetHeight; w.style.left=Math.max(0,Math.min(mx,ox+e.clientX-sx))+'px'; w.style.top=Math.max(0,Math.min(my,oy+e.clientY-sy))+'px'});
+    bar.addEventListener('pointerup',()=>{if(drag){drag=false; msg.textContent='Moviste la ventana arrastrando su barra de título.'}});
+  }
   if(kind==='mouse'){
     const z=$('#mzone'), o=$('#mz-out'), s=$('#mz-sub'); let t;
     const say=(a,b)=>{o.textContent=a; s.textContent=b};
@@ -891,10 +1501,335 @@ function initExtra(kind){
   }
 }
 
+/* ---------- Íconos: investigación y verificación ---------- */
+Object.assign(IC, {
+  idea:'<path d="M18 36h12M19 42h10"/><path d="M24 5a12 12 0 0 0-7 21.7c1.3 1 2 2.4 2 4V33h10v-2.3c0-1.6.7-3 2-4A12 12 0 0 0 24 5z"/>',
+  evalua:'<rect x="10" y="8" width="28" height="35" rx="3"/><path d="M18 8V5h12v3"/><path d="M16 20l3 3 5-5M16 32l3 3 5-5M28 21h5M28 33h5"/>',
+  cuaderno:'<rect x="12" y="5" width="28" height="38" rx="3"/><path d="M8 12h6M8 20h6M8 28h6M8 36h6M20 15h14M20 23h14M20 31h9"/>',
+  relaciona:'<circle cx="24" cy="12" r="6"/><rect x="5" y="32" width="12" height="10" rx="2"/><rect x="31" y="32" width="12" height="10" rx="2"/><path d="M24 18v7M11 32v-4h26v4"/>',
+  cita:'<path d="M10 27c0-8 4-13 10-14v5c-3 1-4 3-4 6h4v10H10zM28 27c0-8 4-13 10-14v5c-3 1-4 3-4 6h4v10H28z"/>',
+  palomita:'<circle cx="24" cy="24" r="18"/><path d="M15 24l6 6 12-12"/>',
+  candado:'<rect x="10" y="21" width="28" height="21" rx="3"/><path d="M16 21v-6a8 8 0 0 1 16 0v6M24 29v5"/>',
+  credencial:'<rect x="5" y="10" width="38" height="28" rx="3"/><circle cx="17" cy="22" r="5"/><path d="M10 33c1-4 4-6 7-6s6 2 7 6M28 19h10M28 25h10M28 31h6"/>',
+  calendario:'<rect x="6" y="9" width="36" height="32" rx="3"/><path d="M6 18h36M15 5v8M33 5v8M13 26h4M22 26h4M31 26h4M13 34h4M22 34h4"/>',
+  texto:'<path d="M10 5h20l8 8v18"/><path d="M10 5v38h18"/><path d="M16 18h14M16 24h14M16 30h8"/><circle cx="37" cy="37" r="7"/><path d="M37 34v3.5M37 40.5v.01"/>',
+  grafica:'<path d="M6 42h36"/><rect x="10" y="26" width="7" height="16"/><rect x="21" y="16" width="7" height="26"/><rect x="32" y="8" width="7" height="34"/>',
+  alerta:'<path d="M24 6 44 40H4z"/><path d="M24 18v10M24 34v.01"/>',
+  diana:'<circle cx="22" cy="26" r="16"/><circle cx="22" cy="26" r="9"/><circle cx="22" cy="26" r="2.5"/><path d="M24 24 40 8M34 8h6v6"/>',
+  escudo2:'<path d="M24 5l15 6v11c0 10-6.5 17-15 21C15.5 39 9 32 9 22V11z"/><path d="M17 24l5 5 9-10"/>'
+});
+
+/* ---------- Escena 7: ruta de investigación ---------- */
+function sceneInvestigar(){
+  const road='M110 150 H 790 C 870 150, 870 410, 790 410 H 110';
+  const st=[['define',130,150,'#F97316','idea','Define','el tema'],['busca',340,150,'#2F7BE8','lupa','Busca','información'],['evalua',560,150,'#16A34A','evalua','Evalúa la','información'],['organiza',770,150,'#5B4BD6','cuaderno','Organiza','tus ideas'],
+            ['analiza',770,410,'#0E8A86','relaciona','Analiza','y relaciona'],['elabora',560,410,'#D63384','documento','Elabora tu','contenido'],['cita',340,410,'#D99A12','cita','Cita tus','fuentes'],['revisa',130,410,'#7A3FC2','palomita','Revisa','y corrige']];
+  const stations=st.map(([id,x,y,c,ic,l1,l2],i)=>`<g class="hot" data-id="${id}">
+    <rect x="${x-80}" y="${y-56}" width="160" height="160" fill="transparent"/>
+    <circle cx="${x}" cy="${y}" r="50" fill="${c}"/>
+    <circle cx="${x}" cy="${y}" r="50" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3"/>
+    <g transform="translate(${x-22} ${y-22}) scale(.9167)" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${IC[ic]}</g>
+    <circle cx="${x-38}" cy="${y-38}" r="17" class="inv-badge" stroke="${c}"/>
+    <text x="${x-38}" y="${y-32}" class="inv-num" style="fill:${c}">${i+1}</text>
+    <text x="${x}" y="${y+76}" class="sc-n">${l1}</text><text x="${x}" y="${y+96}" class="sc-n">${l2}</text></g>`).join('');
+  return `<svg class="scene" viewBox="0 0 900 560" role="img" aria-label="Ruta con los 8 pasos para investigar un tema">
+  <path d="${road}" class="inv-road"/>
+  <path d="${road}" class="inv-lane"/>
+  <circle r="9" class="inv-walker" style="offset-path:path('${road}')"/>
+  <g transform="translate(36 380)"><path d="M10 8h40v14a20 20 0 0 1-40 0z" fill="#F5C542" stroke="#B88A12" stroke-width="2"/><path d="M10 12H2c0 10 4 14 10 15M50 12h8c0 10-4 14-10 15" fill="none" stroke="#B88A12" stroke-width="2.5"/><rect x="25" y="42" width="10" height="10" fill="#B88A12"/><rect x="16" y="52" width="28" height="8" rx="2" fill="#B88A12"/></g>
+  <text x="66" y="472" class="sc-s" style="font-weight:700">¡Listo!</text>
+  <g transform="translate(40 104)"><path d="M6 0v80" stroke="var(--muted)" stroke-width="3"/><path d="M8 2h34l-8 10 8 10H8z" fill="var(--acc-investiga)"/></g>
+  <text x="62" y="210" class="sc-s" style="font-weight:700">Inicio</text>
+  ${stations}
+  </svg>`;
+}
+
+/* ---------- Escena 8: noticia de práctica ---------- */
+function sceneVerificar(){
+  return `<svg class="scene" viewBox="0 0 900 580" role="img" aria-label="Página de una noticia inventada con pistas para saber si la información es verdadera">
+  <rect x="30" y="20" width="840" height="540" rx="14" class="sc-card"/>
+  <path d="M44 20h812a14 14 0 0 1 14 14v24H30V34a14 14 0 0 1 14-14z" class="vf-chrome"/>
+  <circle cx="52" cy="39" r="5" fill="#E5534B"/><circle cx="68" cy="39" r="5" fill="#E9B23A"/><circle cx="84" cy="39" r="5" fill="#4CB66A"/>
+  <path d="M108 58V36a8 8 0 0 1 8-8h174a8 8 0 0 1 8 8v22z" class="vf-tab"/>
+  <text x="124" y="48" class="vf-tt">Noticias Rápidas</text>
+  <g class="hot" data-id="fuente">
+    <rect x="46" y="66" width="808" height="34" rx="17" class="vf-addr"/>
+    <g transform="translate(60 72) scale(.46)" fill="none" stroke="#16A34A" stroke-width="4.5" stroke-linecap="round">${IC.candado}</g>
+    <text x="88" y="88" class="vf-url"><tspan class="vf-url-s">https://</tspan>noticias-rapidas.ejemplo/ultima-hora</text>
+  </g>
+  <path d="M30 108h840" class="vf-line"/>
+  <text x="596" y="138" class="sc-s" style="text-anchor:end; font-style:italic">Ejemplo inventado para practicar</text>
+  <g class="hot" data-id="alertas">
+    <rect x="54" y="122" width="124" height="24" rx="12" fill="#D63A3A"/>
+    <text x="116" y="139" class="vf-pill">¡ÚLTIMA HORA!</text>
+    <text x="54" y="182" class="vf-h">¡Increíble! Comprueban que el celular</text>
+    <text x="54" y="212" class="vf-h">se carga con jugo de limón</text>
+  </g>
+  <g class="hot" data-id="autoria">
+    <rect x="50" y="226" width="170" height="32" fill="transparent"/>
+    <circle cx="68" cy="242" r="12" class="vf-av"/><circle cx="68" cy="238" r="4.5" class="vf-avf"/><path d="M60 250c2-5 14-5 16 0" class="vf-avf"/>
+    <text x="88" y="247" class="vf-b"><tspan style="font-weight:700">Por:</tspan> Anónimo</text>
+  </g>
+  <g class="hot" data-id="fecha">
+    <rect x="228" y="226" width="270" height="32" fill="transparent"/>
+    <g transform="translate(236 232) scale(.4)" fill="none" class="vf-ic" stroke-width="4" stroke-linecap="round">${IC.calendario}</g>
+    <text x="260" y="247" class="vf-b">Publicado el 3 de marzo de 2015</text>
+  </g>
+  <g class="hot" data-id="imagenes">
+    <rect x="54" y="270" width="262" height="148" rx="10" fill="#FFF4C2"/>
+    <rect x="96" y="296" width="52" height="96" rx="9" fill="#1F2329"/><rect x="101" y="304" width="42" height="76" rx="4" fill="#3B82F6"/>
+    <path d="M124 322l-8 14h8l-6 14" fill="none" stroke="#FFE27A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M122 392 C 130 412, 190 410, 206 380" fill="none" stroke="#1F2329" stroke-width="3"/>
+    <ellipse cx="232" cy="356" rx="54" ry="40" fill="#F5D33A" stroke="#C9A20F" stroke-width="2"/>
+    <ellipse cx="218" cy="342" rx="16" ry="8" fill="#fff" opacity=".45"/>
+    <path d="M284 348 l10 -4 -2 10z" fill="#C9A20F"/>
+    <rect x="234" y="396" width="76" height="18" rx="9" fill="#1F2329" opacity=".75"/><text x="272" y="409" class="vf-cap">Foto: ¿?</text>
+  </g>
+  <g class="hot" data-id="contenido">
+    <rect x="326" y="266" width="274" height="156" fill="transparent"/>
+    <text x="334" y="290" class="vf-b" style="font-weight:700">¡<tspan class="vf-err">Haora</tspan> ya no <tspan class="vf-err">nesesitas</tspan> cargador!</text>
+    <text x="334" y="316" class="vf-b">Todos lo están haciendo y los</text>
+    <text x="334" y="340" class="vf-b">expertos no quieren que lo</text>
+    <text x="334" y="364" class="vf-b">sepas. Es lo mejor que vas a</text>
+    <text x="334" y="388" class="vf-b">ver hoy, créeme.</text>
+    <path d="M334 404h220M334 414h160" class="vf-line" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g class="hot" data-id="evidencia">
+    <rect x="54" y="432" width="546" height="48" rx="10" class="vf-box"/>
+    <g transform="translate(70 442) scale(.58)" fill="none" class="vf-ic" stroke-width="3.4">${IC.grafica}</g>
+    <text x="108" y="461" class="vf-b"><tspan style="font-weight:700">Fuentes y datos:</tspan> ninguno</text>
+    <text x="588" y="461" class="vf-q">?</text>
+  </g>
+  <g class="hot" data-id="alertas">
+    <rect x="54" y="492" width="546" height="50" rx="12" fill="#D63A3A"/>
+    <text x="327" y="523" class="vf-share">¡Compártelo con todos antes de que lo borren!</text>
+  </g>
+  <g class="hot" data-id="proposito">
+    <rect x="616" y="122" width="238" height="150" rx="12" fill="#FFF1D6" stroke="#F0B44C"/>
+    <text x="632" y="144" class="vf-ad-l">PUBLICIDAD</text>
+    <ellipse cx="672" cy="196" rx="30" ry="22" fill="#F5D33A" stroke="#C9A20F" stroke-width="2"/>
+    <path d="M672 186l-6 10h6l-4 10" fill="none" stroke="#7A5A00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="712" y="186" class="vf-ad-t">Cargador</text><text x="712" y="206" class="vf-ad-t">de limón</text>
+    <text x="712" y="226" class="vf-ad-s">¡Solo hoy $999!</text>
+    <rect x="632" y="236" width="206" height="26" rx="13" fill="#E2722B"/>
+    <text x="735" y="254" class="vf-pill" style="font-size:13px">Comprar ahora</text>
+  </g>
+  <g class="hot" data-id="criterio">
+    <rect x="616" y="286" width="238" height="120" rx="12" class="vf-box2"/>
+    <g transform="translate(632 318) scale(1.05)" fill="none" stroke="#E2A21A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">${IC.idea}</g>
+    <text x="692" y="338" class="vf-b" style="font-weight:700">¿Esto tiene</text>
+    <text x="692" y="360" class="vf-b" style="font-weight:700">sentido?</text>
+    <text x="692" y="384" class="sc-s" style="text-anchor:start">Piensa antes de creer.</text>
+  </g>
+  <g class="hot" data-id="contrasta">
+    <rect x="616" y="420" width="238" height="122" rx="12" class="vf-box2"/>
+    <text x="632" y="446" class="vf-b" style="font-weight:700">En otras fuentes</text>
+    ${['Periódico reconocido','Universidad','Sitio .gob.mx'].map((t,i)=>`<circle cx="642" cy="${470+i*24}" r="8" fill="#D63A3A"/><path d="M638.5 ${466.5+i*24}l7 7M645.5 ${466.5+i*24}l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/><text x="658" y="${475+i*24}" class="vf-sm">${t}: no aparece</text>`).join('')}
+  </g>
+  </svg>`;
+}
+
+/* ---------- Bloques interactivos ---------- */
+const esc = t => String(t).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function checkHTML(id,title,items){return `<div class="box wide"><h3>${title}</h3><div class="cl" id="${id}">${items.map((t,i)=>`<label class="cl-i" for="${id}-${i}"><input type="checkbox" id="${id}-${i}"><span>${t}</span></label>`).join('')}</div><p class="tr-msg" id="${id}-msg"></p></div>`}
+function initCheck(id,msg){const box=$('#'+id), out=$('#'+id+'-msg'); const upd=()=>{const all=box.querySelectorAll('input'), n=[...all].filter(x=>x.checked).length; out.innerHTML=msg(n,all.length)}; box.addEventListener('change',upd); upd()}
+Object.assign(EXTRA, {
+  embudo:()=>`<div class="box wide"><h3>De un tema amplio a uno delimitado</h3><div class="funnel">
+    <div style="width:100%; --o:14%">Tecnología</div>
+    <div style="width:86%; --o:24%">Tecnología en la educación</div>
+    <div style="width:72%; --o:36%">Efectos de la tecnología en la educación</div>
+    <div style="width:60%; --o:50%">Efectos del uso del celular en el aprendizaje de alumnos de secundaria</div>
+  </div><p class="tr-msg">Entre más abajo, más fácil es encontrar información precisa.</p></div>`,
+  evaluaChk:()=>checkHTML('chk-ev','Evalúa una fuente: marca lo que cumple',['<b>Autoridad:</b> sé quién la escribió y es experto o una institución reconocida.','<b>Actualidad:</b> tiene fecha y es reciente para mi tema.','<b>Objetividad:</b> presenta hechos y datos, no solo opiniones.','<b>Relevancia:</b> responde a mi pregunta de investigación.']),
+  revisaChk:()=>checkHTML('chk-rv','Lista de revisión antes de entregar',['<b>Ortografía:</b> sin faltas ni acentos olvidados.','<b>Redacción:</b> las oraciones se entienden y no se repiten ideas.','<b>Coherencia:</b> tiene título, introducción, desarrollo y conclusión.','<b>Formato:</b> letra, márgenes e imágenes ordenados.','<b>Fuentes:</b> todas las citas tienen su referencia.']),
+  compartirChk:()=>checkHTML('chk-sh','Antes de compartir, pregúntate',['¿Sé quién lo publicó y es una fuente confiable?','¿Tiene autor y fecha reciente?','¿Lo encontré igual en otros sitios confiables?','¿Muestra datos o pruebas?','¿El titular es tranquilo, sin exagerar?','¿Tiene sentido?']),
+  apa:()=>`<div class="box wide"><h3>Arma tu referencia en formato APA</h3>
+    <div class="seg" id="apa-seg"><button type="button" class="btn" data-k="web" aria-pressed="true">Página web</button><button type="button" class="btn" data-k="libro" aria-pressed="false">Libro</button></div>
+    <div class="apa-grid">
+      <label class="apa-f">Apellido del autor<input class="tr-in" id="apa-ap" value="Pérez"></label>
+      <label class="apa-f">Inicial del nombre<input class="tr-in" id="apa-in" value="M."></label>
+      <label class="apa-f">Año<input class="tr-in" id="apa-yr" value="2024" inputmode="numeric"></label>
+      <label class="apa-f">Título<input class="tr-in" id="apa-ti" value="Efectos de la tecnología en la educación"></label>
+      <label class="apa-f" id="apa-sl">Nombre del sitio<input class="tr-in" id="apa-si" value="Revista Escolar Digital"></label>
+      <label class="apa-f" id="apa-ul">Dirección (URL)<input class="tr-in" id="apa-url" value="https://www.ejemplo.edu.mx/articulo"></label>
+    </div>
+    <p class="tr-msg">Los datos de ejemplo son inventados; cámbialos por los de tu fuente.</p>
+    <div class="apa-out" id="apa-out"></div>
+    <p class="tr-msg" id="apa-cite"></p>
+    <div><button type="button" class="btn solid" id="apa-copy">Copiar referencia</button> <span class="tr-msg" id="apa-ok"></span></div></div>`
+});
+function initInv(kind){
+  if(kind==='evaluaChk') initCheck('chk-ev',(n,t)=> n===t?'<b>Fuente confiable:</b> cumple los cuatro criterios. Puedes usarla.':n>=2?`Cumple ${n} de ${t}. Úsala con cuidado y compárala con otra fuente.`:'Esta fuente no es confiable todavía. Busca otra mejor.');
+  if(kind==='revisaChk') initCheck('chk-rv',(n,t)=> n===t?'<b>¡Listo para entregar!</b>':`Llevas ${n} de ${t}. Revisa lo que falta antes de entregar.`);
+  if(kind==='compartirChk') initCheck('chk-sh',(n,t)=> n===t?'<b>Parece confiable.</b> Si la compartes, incluye de dónde la sacaste.':n>=4?`Marcaste ${n} de ${t}. Investiga un poco más antes de compartir.`:'<b>Mejor no la compartas.</b> Tiene varias señales de que podría ser falsa.');
+  if(kind==='apa'){
+    let k='web'; const g=id=>$('#'+id).value.trim();
+    const upd=()=>{const ap=g('apa-ap')||'Apellido', ini=g('apa-in')||'N.', yr=g('apa-yr')||'s.f.', ti=g('apa-ti')||'Título', si=g('apa-si')||(k==='web'?'Sitio':'Editorial'), url=g('apa-url');
+      const head=`${esc(ap)}, ${esc(ini)} (${esc(yr)}). <i>${esc(ti)}</i>. ${esc(si)}.`;
+      $('#apa-out').innerHTML = k==='web' && url ? `${head} ${esc(url)}` : head;
+      $('#apa-cite').innerHTML = `Cita dentro del texto: <b>(${esc(ap)}, ${esc(yr)})</b>`;
+      $('#apa-sl').firstChild.textContent = k==='web'?'Nombre del sitio':'Editorial';
+      $('#apa-ul').hidden = k!=='web'; $('#apa-ok').textContent=''};
+    $('#apa-seg').addEventListener('click',e=>{const b=e.target.closest('[data-k]'); if(!b) return; k=b.dataset.k; $('#apa-seg').querySelectorAll('[data-k]').forEach(x=>x.setAttribute('aria-pressed', x===b)); if(k==='libro' && $('#apa-si').value==='Revista Escolar Digital') $('#apa-si').value='Editorial Ejemplo'; if(k==='web' && $('#apa-si').value==='Editorial Ejemplo') $('#apa-si').value='Revista Escolar Digital'; upd()});
+    ['apa-ap','apa-in','apa-yr','apa-ti','apa-si','apa-url'].forEach(id=>$('#'+id).addEventListener('input',upd));
+    $('#apa-copy').onclick=()=>{const txt=$('#apa-out').textContent; const ok=()=>$('#apa-ok').textContent='Copiada.';
+      const fb=()=>{const r=document.createRange(); r.selectNodeContents($('#apa-out')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); $('#apa-ok').textContent='Selecciónala y cópiala con Ctrl + C.'};
+      try{ navigator.clipboard.writeText(txt).then(ok,fb) }catch(e){ fb() }};
+    upd();
+  }
+}
+
+/* ---------- Juego: ¿confiable o dudosa? ---------- */
+const GAME=[
+  ['Un sitio .gob.mx publica el calendario escolar oficial de este ciclo, con fecha de actualización.', true, 'Es una fuente oficial y la información es actual.'],
+  ['Mensaje en redes: «¡Reenvía esto a 10 personas o tu cuenta se borrará mañana!»', false, 'Genera miedo, no tiene fuente y te pide compartir sin verificar.'],
+  ['Artículo de una universidad sobre el cambio climático, con autor, fecha y referencias a estudios.', true, 'Tiene autoría, fecha y evidencia.'],
+  ['Video viral sin autor ni fecha que asegura que un famoso regala celulares a quien comente.', false, 'Es demasiado bueno para ser cierto y no tiene fuente.'],
+  ['Nota de un periódico reconocido; otros tres medios serios publicaron lo mismo.', true, 'Está contrastada con varias fuentes confiables.'],
+  ['Blog anónimo de 2012 con «el mejor truco para tu celular nuevo».', false, 'Es anónimo y está muy desactualizado para un tema de tecnología.']
+];
+function gameHTML(){return `<div class="sbox span3"><h3>Juego: ¿confiable o dudosa?</h3><p>Lee cada caso y decide. Todos los casos son inventados para practicar.</p>
+  <div class="game" id="game">${GAME.map((g,i)=>`<div class="gcard" data-i="${i}"><p>${g[0]}</p><div class="gbtns"><button type="button" class="btn" data-a="1">Confiable</button><button type="button" class="btn" data-a="0">Dudosa</button></div><p class="gfb" aria-live="polite"></p></div>`).join('')}</div>
+  <p class="fb" id="game-score"></p></div>`}
+function initGame(){
+  const box=$('#game'); if(!box) return; let ok=0, done=0;
+  box.addEventListener('click',e=>{const b=e.target.closest('[data-a]'); if(!b) return; const c=b.closest('.gcard'); if(c.dataset.done) return;
+    const g=GAME[+c.dataset.i], right=(b.dataset.a==='1')===g[1]; c.dataset.done=1; done++; if(right) ok++;
+    c.classList.add(right?'gok':'gbad'); b.classList.add('solid');
+    c.querySelector('.gfb').innerHTML=`<b>${right?'¡Bien!':'No exactamente.'}</b> Es ${g[1]?'confiable':'dudosa'}: ${g[2]}`;
+    c.querySelectorAll('[data-a]').forEach(x=>x.disabled=true);
+    if(done===GAME.length){const s=$('#game-score'); s.className='fb ok'; s.textContent=`Resultado: ${ok} de ${GAME.length}. ${ok===GAME.length?'¡Te informas con inteligencia!':'Revisa las pistas y vuelve a intentarlo otro día.'}`}
+  });
+}
+
+/* ---------- Contenido de los temas 7 y 8 ---------- */
+VIEWS.investiga={
+  menu:'¿Cómo investigar un tema?', menuSub:'8 pasos de investigación', icon:'lupa', accentVar:'--acc-investiga',
+  eyebrow:'Tema 7 · Investigación', title:'¿Cómo investigar un tema?',
+  lead:'Sigue estos pasos y conviértete en un gran investigador. Toca cada paso de la ruta para ver qué hacer.',
+  scene:sceneInvestigar, vb:[900,560], pins:{},
+  items:[
+    {id:'define', name:'Define el tema', color:'#F97316', icon:'idea', kind:'Paso 1',
+      lead:'Lo primero es tener claro qué quieres investigar. Sé específico y delimita el tema para que sea más fácil buscar información.',
+      funcs:['Elegir un tema que te interese','Delimitarlo: qué, quiénes, dónde y cuándo','Escribir una pregunta que guíe tu investigación'],
+      ejemplo:'“Efectos de la tecnología en la educación”.',
+      more:['Un tema muy amplio, como “la tecnología”, da tanta información que no sabrás por dónde empezar.','Una buena pregunta guía sería: <b>¿Cómo influye el uso del celular en el aprendizaje de los alumnos de secundaria?</b>'],
+      extra:'embudo'},
+    {id:'busca', name:'Busca información', color:'#2F7BE8', icon:'lupa', kind:'Paso 2',
+      lead:'Utiliza fuentes confiables y variadas, como libros, enciclopedias, páginas web oficiales, artículos científicos y bibliotecas.',
+      funcs:['Bibliotecas','Sitios web oficiales (.gob, .edu)','Libros y revistas científicas'],
+      ejemplo:'Buscas en la biblioteca escolar, en una enciclopedia y en la página de una universidad.',
+      more:['Usa <b>palabras clave</b>, no oraciones completas: <i>celular aprendizaje secundaria</i>.','Pon una frase entre comillas para buscarla exacta: <i>"tecnología educativa"</i>.','En México, los sitios oficiales terminan en <b>.gob.mx</b> y los educativos en <b>.edu.mx</b>.','Anota de dónde sacas cada dato: lo vas a necesitar para citar tus fuentes.']},
+    {id:'evalua', name:'Evalúa la información', color:'#16A34A', icon:'evalua', kind:'Paso 3',
+      lead:'No toda la información de internet es correcta. Verifica que sea confiable, actual y esté respaldada por expertos o instituciones reconocidas.',
+      funcs:['<b>Autoridad:</b> ¿quién lo escribió?','<b>Actualidad:</b> ¿es reciente?','<b>Objetividad:</b> ¿presenta hechos o solo opiniones?','<b>Relevancia:</b> ¿sirve para mi tema?'],
+      ejemplo:'Descartas un blog anónimo y te quedas con un artículo de una universidad con autor y fecha.',
+      extra:'evaluaChk', rel:[['verifica','Ver cómo saber si la información es verdadera']]},
+    {id:'organiza', name:'Organiza tus ideas', color:'#5B4BD6', icon:'cuaderno', kind:'Paso 4',
+      lead:'Toma notas, resalta lo importante y clasifica la información. Puedes usar un cuaderno, notas digitales o mapas conceptuales.',
+      funcs:['Ideas principales','Datos importantes','Citas','Preguntas pendientes'],
+      ejemplo:'En tu cuaderno separas lo que encontraste en cuatro columnas: ideas, datos, citas y dudas.',
+      more:['Escribe con <b>tus propias palabras</b>; copia textual solo lo que vayas a citar entre comillas.','Un <b>mapa conceptual</b> te ayuda a ver cómo se conectan las ideas.','Las fichas de trabajo (en papel o digitales) facilitan ordenar la información después.']},
+    {id:'analiza', name:'Analiza y relaciona', color:'#0E8A86', icon:'relaciona', kind:'Paso 5',
+      lead:'Compara la información de diferentes fuentes, identifica similitudes y diferencias, y piensa cómo se conecta con tu tema.',
+      funcs:['Comparar lo que dicen distintas fuentes','Identificar similitudes y diferencias','Relacionar todo con tu pregunta'],
+      ejemplo:'Dos artículos dicen que la tecnología ayuda a aprender y uno advierte sobre las distracciones: anotas ambas posturas.',
+      more:['Una <b>tabla comparativa</b> ayuda a ver qué coincide y qué no.','De este paso salen <b>tus propias conclusiones</b>.']},
+    {id:'elabora', name:'Elabora tu contenido', color:'#D63384', icon:'documento', kind:'Paso 6',
+      lead:'Organiza la información de forma clara y coherente. Puedes hacer un resumen, un ensayo, una presentación o un informe, según lo que necesites.',
+      funcs:['Título','Introducción','Desarrollo','Conclusión'],
+      ejemplo:'Con lo que investigaste haces una presentación de 8 diapositivas para exponer en clase.',
+      more:['<b>Introducción:</b> presenta el tema y tu pregunta.','<b>Desarrollo:</b> explica lo que encontraste, con datos y ejemplos.','<b>Conclusión:</b> responde tu pregunta con tus propias ideas.']},
+    {id:'cita', name:'Cita tus fuentes', color:'#D99A12', icon:'cita', kind:'Paso 7',
+      lead:'Reconoce el trabajo de otros utilizando un formato de citación (como APA, MLA, etc.). Esto da credibilidad a tu investigación y evita el plagio.',
+      funcs:['Dar crédito a los autores','Dar credibilidad a tu trabajo','Evitar el plagio'],
+      ejemplo:'Al final de tu trabajo pones una lista de referencias en orden alfabético.',
+      more:['<b>Plagio</b> es presentar como tuyo el trabajo de otra persona.','Si copias una frase textual, ponla entre comillas y agrega (Autor, año).'],
+      extra:'apa'},
+    {id:'revisa', name:'Revisa y corrige', color:'#7A3FC2', icon:'palomita', kind:'Paso 8',
+      lead:'Antes de entregar tu trabajo, revisa la ortografía, la redacción y que toda la información esté completa y bien organizada.',
+      funcs:['Ortografía','Redacción','Coherencia','Formato'],
+      ejemplo:'Lees tu trabajo en voz alta y encuentras una oración que no se entendía.',
+      more:['Leer en voz alta ayuda a encontrar errores.','Pide a alguien más que lo lea.'],
+      extra:'revisaChk'}
+  ],
+  quiz:{define:'el paso donde delimitas qué vas a investigar', busca:'el paso donde consultas bibliotecas y sitios oficiales', evalua:'el paso donde revisas autoridad, actualidad y objetividad', organiza:'el paso donde tomas notas y haces mapas conceptuales', analiza:'el paso donde comparas fuentes y buscas similitudes', elabora:'el paso donde escribes tu resumen, ensayo o presentación', cita:'el paso que evita el plagio', revisa:'el último paso, antes de entregar'},
+  summary(){ const t=(id)=>tagFor('investiga',id); return `
+    <div class="sbox"><h3>Los 8 pasos en orden</h3><div class="tags">${['define','busca','evalua','organiza','analiza','elabora','cita','revisa'].map(t).join('')}</div></div>
+    <div class="sbox"><h3>Fuentes confiables</h3><ul class="ticks"><li>${TICK}<span>Bibliotecas</span></li><li>${TICK}<span>Sitios web oficiales (.gob, .edu)</span></li><li>${TICK}<span>Libros y revistas científicas</span></li><li>${TICK}<span>Enciclopedias</span></li></ul></div>
+    <div class="sbox"><h3>¡Tú puedes!</h3><p class="big-note">Investigar no solo es buscar información, es aprender a pensar, analizar y construir tus propias ideas.</p></div>`; }
+};
+VIEWS.verifica={
+  menu:'¿La información es verdadera?', menuSub:'Detecta noticias falsas', icon:'escudo2', accentVar:'--acc-verifica',
+  eyebrow:'Tema 8 · Información confiable', title:'¿Cómo saber si la información de internet es verdadera?',
+  lead:'En internet hay mucha información, pero no toda es confiable. Esta noticia es inventada y tiene muchas pistas de que es falsa: toca cada parte para descubrirlas.',
+  hint:'Busca las pistas en la noticia y tócalas.',
+  scene:sceneVerificar, vb:[900,580], pinsOff:true,
+  pins:{fuente:[600,83], alertas:[300,134], autoria:[134,242], fecha:[380,242], imagenes:[185,300], contenido:[470,420], evidencia:[462,456], proposito:[735,122], criterio:[735,413], contrasta:[735,551]},
+  items:[
+    {id:'fuente', name:'Revisa la fuente', short:'Fuente', color:'#2F7BE8', icon:'candado', kind:'Pista 1',
+      lead:'Verifica quién publicó la información: el autor, la organización o el sitio web. Las fuentes oficiales, educativas y reconocidas suelen ser más confiables.',
+      funcs:['Gobiernos y universidades','Organismos internacionales','Medios de comunicación serios','Expertos en el tema'],
+      ejemplo:'En la noticia de práctica, “noticias-rapidas.ejemplo” no es un medio conocido ni oficial.',
+      more:['El candado y el <b>https://</b> solo significan que la conexión es segura (cifrada). <b>No</b> garantizan que la información sea verdadera.','Busca la sección “Quiénes somos” o “Acerca de” del sitio.','Cuidado con direcciones que imitan a sitios famosos cambiando una letra.']},
+    {id:'autoria', name:'Autoría y responsabilidad', short:'Autor', color:'#D99A12', icon:'credencial', kind:'Pista 2',
+      lead:'Revisa quién escribió el contenido. Busca el nombre del autor, su formación o experiencia en el tema.',
+      funcs:['Buscar el nombre del autor','Revisar su formación o experiencia','Si no hay autor o es anónimo, pensar dos veces'],
+      ejemplo:'La noticia dice “Por: Anónimo”. Nadie se hace responsable de lo que dice.',
+      more:['Busca al autor en internet: ¿escribe sobre ese tema? ¿trabaja en una institución?','Un experto en salud es confiable para temas de salud, pero no necesariamente para tecnología.']},
+    {id:'fecha', name:'Fecha de publicación', short:'Fecha', color:'#16A34A', icon:'calendario', kind:'Pista 3',
+      lead:'Asegúrate de que la información esté actualizada. Algunos temas cambian con el tiempo, como la salud, la tecnología o las noticias.',
+      funcs:['Buscar la fecha de publicación o actualización','Saber si la información sigue siendo válida'],
+      ejemplo:'La nota es de 2015. Para un tema de tecnología, eso es muy viejo.',
+      more:['Muchas noticias viejas se vuelven a compartir como si fueran nuevas.','Si no tiene fecha, desconfía.']},
+    {id:'contrasta', name:'Compara con otras fuentes', short:'Otras fuentes', color:'#5B4BD6', icon:'ventanas', kind:'Pista 4',
+      lead:'Busca la misma información en varios sitios confiables. Si todos coinciden, es más probable que sea verdadera. Si hay muchas diferencias, investiga más.',
+      funcs:['Buscar la noticia en otros sitios confiables','Ver si coinciden los datos','Investigar más si hay diferencias'],
+      ejemplo:'Ningún periódico reconocido, universidad ni sitio oficial publicó lo del “cargador de limón”.',
+      more:['Si una noticia “importante” solo aparece en un sitio, es una mala señal.','Existen medios dedicados a verificar noticias (verificación de datos o <i>fact-checking</i>).']},
+    {id:'contenido', name:'Analiza el contenido', short:'Contenido', color:'#0E8A86', icon:'texto', kind:'Pista 5',
+      lead:'Revisa si el texto tiene un tono objetivo y equilibrado. Desconfía de los titulares sensacionalistas, los errores de ortografía y las opiniones sin fundamento.',
+      funcs:['Revisar que el tono sea objetivo','Fijarte en la ortografía','Distinguir hechos de opiniones'],
+      ejemplo:'“¡Haora ya no nesesitas cargador!” tiene dos faltas de ortografía, y “los expertos no quieren que lo sepas” es una opinión sin pruebas.',
+      more:['Un <b>hecho</b> se puede comprobar; una <b>opinión</b> es lo que alguien piensa.','Los medios serios revisan su ortografía antes de publicar.']},
+    {id:'evidencia', name:'Revisa la evidencia', short:'Evidencia', color:'#D63384', icon:'grafica', kind:'Pista 6',
+      lead:'Una información confiable presenta datos, investigaciones, estadísticas o pruebas claras. Evita los textos que solo usan opiniones o que no muestran fuentes.',
+      funcs:['Datos','Cifras','Estudios','Referencias'],
+      ejemplo:'La noticia no muestra ningún dato, estudio ni referencia.',
+      more:['Si menciona un estudio, busca el estudio original.']},
+    {id:'alertas', name:'Detecta señales de alerta', short:'Alertas', color:'#D63A3A', icon:'alerta', kind:'Pista 7',
+      lead:'Ten cuidado con información que parezca demasiado exagerada, con títulos sensacionalistas, que genere miedo o emoción extrema, o que invite a compartirla sin verificar.',
+      funcs:['Titulares exagerados','Sin fuentes','Errores de ortografía','Pide que lo compartas'],
+      ejemplo:'“¡ÚLTIMA HORA!”, “¡Increíble!” y “Compártelo antes de que lo borren” buscan que reacciones sin pensar.',
+      more:['Las noticias falsas apuestan a la emoción: sorpresa, miedo o enojo.','Si te pide compartir con urgencia, detente y verifica.']},
+    {id:'imagenes', name:'Verifica imágenes y videos', short:'Imagen', color:'#E06A12', icon:'imagen', kind:'Pista 8',
+      lead:'Las imágenes y videos pueden editarse, ser falsos o sacarse de contexto. Usa herramientas de búsqueda inversa de imágenes o revisa si el video proviene de una fuente confiable.',
+      funcs:['Búsqueda inversa de imágenes (Google Imágenes)','Revisar si el video viene de una fuente confiable (YouTube, sitios oficiales)'],
+      ejemplo:'La foto no dice quién la tomó (“Foto: ¿?”) y podría estar editada.',
+      more:['Una foto real de otro año o de otro país puede usarse para una noticia falsa.','Hoy la inteligencia artificial puede crear imágenes y videos falsos muy realistas.']},
+    {id:'proposito', name:'Revisa la objetividad y el propósito', short:'Propósito', color:'#9333EA', icon:'diana', kind:'Pista 9',
+      lead:'Pregúntate: ¿quién gana con esta información? Puede haber intereses comerciales, políticos o personales detrás de un contenido.',
+      funcs:['¿Quiere informarte, convencerte o venderte algo?','¿Hay intereses comerciales, políticos o personales?'],
+      ejemplo:'Junto a la noticia anuncian un “cargador de limón” a $999: alguien gana dinero si te la crees.'},
+    {id:'criterio', name:'Confía en tu criterio', short:'Tu criterio', color:'#4B4FD6', icon:'idea', kind:'Pista 10',
+      lead:'Si algo te parece extraño, demasiado bueno para ser cierto o no tiene sentido, no lo des por verdadero. Siempre piensa, cuestiona y busca más información.',
+      funcs:['Pensar','Cuestionar','Buscar más información'],
+      ejemplo:'Un limón no puede cargar un celular. Con eso basta para dudar.',
+      more:['¡Tu pensamiento también es una herramienta!'],
+      extra:'compartirChk'}
+  ],
+  quiz:{fuente:'la dirección del sitio que publicó la información', autoria:'quién escribió la nota', fecha:'cuándo se publicó', contrasta:'lo que dicen otros sitios confiables', contenido:'el texto con tono exagerado y faltas de ortografía', evidencia:'los datos o referencias que respaldan la nota', alertas:'el titular sensacionalista o la invitación a compartir', imagenes:'la foto que podría estar editada', proposito:'quién gana dinero si te crees la noticia', criterio:'la pregunta: ¿esto tiene sentido?'},
+  after:initGame,
+  summary(){ return gameHTML() + `
+    <div class="sbox"><h3>No todo lo que ves en internet es cierto</h3><p class="big-note">Piensa, compara, verifica… ¡y comparte solo lo confiable!</p><p>La información también se cuida.</p></div>
+    <div class="sbox"><h3>Herramientas útiles</h3><ul class="ticks"><li>${TICK}<span>Búsqueda inversa de imágenes (Google Imágenes).</span></li><li>${TICK}<span>Verificar videos en su canal o sitio oficial.</span></li><li>${TICK}<span>Buscar la noticia en medios serios.</span></li></ul></div>
+    <div class="sbox"><h3>¡Infórmate con inteligencia!</h3><p class="big-note">La información verdadera te ayuda a aprender, decidir y construir un mejor futuro.</p></div>`; }
+};
+
 /* ---------- Menú y portada ---------- */
 const menu=$('#menu');
 const homeIc='<svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>';
-const smallIc={monitor:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M9 20h6M12 16v4"/></svg>', procesador:'<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>', documento:'<svg viewBox="0 0 24 24"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg>'};
+const smallIc={monitor:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M9 20h6M12 16v4"/></svg>', procesador:'<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>', documento:'<svg viewBox="0 0 24 24"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg>', gabinete:'<svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 7h4M10 10h4"/><circle cx="12" cy="16" r="1.5"/></svg>', capas:'<svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg>', lupa:'<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>', escudo2:'<svg viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 5-3.2 8.5-7.5 10.5C7.7 20 4.5 16.5 4.5 11.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>', ventana:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01"/></svg>'};
 menu.innerHTML = `<a class="mi" href="#inicio" data-view="inicio"><span class="mi-ic" style="--mc:var(--muted)">${homeIc}</span><span class="mi-t"><b>Inicio</b><small>Portada</small></span></a>` +
   Object.entries(VIEWS).map(([k,v])=>`<a class="mi" href="#${k}" data-view="${k}"><span class="mi-ic" style="--mc:var(${v.accentVar})">${smallIc[v.icon]}</span><span class="mi-t"><b>${v.menu}</b><small>${v.menuSub}</small></span></a>`).join('');
 $('#home-cards').innerHTML = Object.entries(VIEWS).map(([k,v],i)=>`<a class="tcard" href="#${k}" style="--mc:var(${v.accentVar})"><span class="mi-ic">${smallIc[v.icon]}</span><p class="eyebrow">${v.eyebrow}</p><h3>${v.title}</h3><p>${v.items.length} partes para explorar: ${v.items.map(x=>x.name.replace(/ \(.*\)/,'')).join(', ')}.</p><span class="go">Abrir tema →</span></a>`).join('');
@@ -946,13 +1881,16 @@ function show(v){
 function renderTopic(v){
   const V=VIEWS[v];
   $('#vh-eyebrow').textContent=V.eyebrow; $('#vh-title').textContent=V.title; $('#vh-lead').textContent=V.lead;
-  holder.innerHTML=V.scene();
+  holder.innerHTML=V.scene(); updClock();
   stage.classList.remove('off'); $('#btn-off').setAttribute('aria-pressed','false');
   $('#btn-off').hidden = v!=='software';
   $('#btn-labels').hidden = !Object.keys(V.pins).length;
-  pinsEl.innerHTML = Object.entries(V.pins).map(([id,[x,y,an]])=>{const it=V.items.find(i=>i.id===id); return `<button class="pin ${an||''}" type="button" data-open="${id}" style="left:${(x/V.vb[0]*100).toFixed(2)}%; top:${(y/V.vb[1]*100).toFixed(2)}%; --pc:${it.color}"><i></i>${it.name}</button>`}).join('');
+  const off=!!V.pinsOff; stage.classList.toggle('nolabels',off); $('#btn-labels').setAttribute('aria-pressed',String(!off));
+  $('#hint-txt').textContent=V.hint||'Toca una parte para abrir su ficha.';
+  pinsEl.innerHTML = Object.entries(V.pins).map(([id,[x,y,an]])=>{const it=V.items.find(i=>i.id===id); return `<button class="pin ${an||''}" type="button" data-open="${id}" style="left:${(x/V.vb[0]*100).toFixed(2)}%; top:${(y/V.vb[1]*100).toFixed(2)}%; --pc:${it.color}"><i></i><span class="pl">${it.name}</span><span class="ps">${it.short||it.name}</span></button>`}).join('');
   $('#chips').innerHTML = V.items.map(it=>`<button class="chip" type="button" data-open="${it.id}" style="--c:${it.color}"><i></i>${it.name}</button>`).join('');
   $('#summary').innerHTML = V.summary();
+  if(V.after) V.after();
 }
 
 /* ---------- Ficha ---------- */
@@ -1037,7 +1975,7 @@ function ask(){
   $('#q-bar').style.width=(quiz.i/quiz.order.length*100)+'%';
   quiz.missed=false; qFb.textContent=''; qFb.className='fb';
 }
-function flash(id,cls){ const el=holder.querySelector(`.hot[data-id="${id}"]`); if(!el) return; el.classList.remove(cls); void el.getBBox; requestAnimationFrame(()=>el.classList.add(cls)); setTimeout(()=>el.classList.remove(cls), cls==='right'?900:550) }
+function flash(id,cls){ holder.querySelectorAll(`.hot[data-id="${id}"]`).forEach(el=>{ el.classList.remove(cls); requestAnimationFrame(()=>el.classList.add(cls)); setTimeout(()=>el.classList.remove(cls), cls==='right'?900:550) }) }
 function answer(id){
   if(!quiz || quiz.lock) return;
   const V=VIEWS[cur]; const want=quiz.order[quiz.i]; const it=V.items.find(x=>x.id===id);
@@ -1059,7 +1997,7 @@ function stopQuiz(){
   if(!quiz) return; quiz=null;
   stage.classList.remove('quiz'); $('#btn-quiz').setAttribute('aria-pressed','false');
   qStat.hidden=true; qBanner.hidden=true; $('#chips').hidden=false;
-  $('#hint-txt').textContent='Toca una parte para abrir su ficha.';
+  $('#hint-txt').textContent=(VIEWS[cur]&&VIEWS[cur].hint)||'Toca una parte para abrir su ficha.';
 }
 
 window.addEventListener('hashchange',route);
