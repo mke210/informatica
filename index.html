@@ -9,7 +9,7 @@
 :root{
   --bg:#EDF1F6; --surface:#FFFFFF; --surface-2:#F2F5F9; --ink:#121B2B; --muted:#56637A; --line:#D5DDE8;
   --stage-1:#F4F7FB; --stage-2:#DCE5F0; --desk:#CBD5E2; --desk-edge:#B4C0D0; --shadow:rgba(18,27,43,.16);
-  --acc-partes:#1F63D6; --acc-interior:#B4318A; --acc-software:#17855A; --acc-componentes:#C2561C; --acc-sistemas:#0E7C86; --acc-escritorio:#4B4FD6; --acc-investiga:#0369A1; --acc-verifica:#BE123C; --on-accent:#FFFFFF;
+  --acc-partes:#1F63D6; --acc-interior:#B4318A; --acc-software:#17855A; --acc-componentes:#C2561C; --acc-sistemas:#0E7C86; --acc-escritorio:#4B4FD6; --acc-investiga:#0369A1; --acc-verifica:#BE123C; --acc-malware:#B42318; --acc-perifericos:#0D7A5F; --acc-imprimir:#1D4ED8; --on-accent:#FFFFFF;
   --ok:#1E8A4C; --bad:#C3362B; --scrim:rgba(10,16,28,.55);
   --font-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
   --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
@@ -20,7 +20,7 @@
   :root:not([data-theme="light"]){
     --bg:#0B111B; --surface:#111A27; --surface-2:#172232; --ink:#E4EAF3; --muted:#95A3B8; --line:#243246;
     --stage-1:#1C2A40; --stage-2:#0F1828; --desk:#22314A; --desk-edge:#2D4060; --shadow:rgba(0,0,0,.4);
-    --acc-partes:#6FA4FF; --acc-interior:#F07CC8; --acc-software:#4FCB8E; --acc-componentes:#FF9B5E; --acc-sistemas:#4FD1C5; --acc-escritorio:#A3A6FF; --acc-investiga:#5CC3FF; --acc-verifica:#FF7A9A; --on-accent:#0B111B;
+    --acc-partes:#6FA4FF; --acc-interior:#F07CC8; --acc-software:#4FCB8E; --acc-componentes:#FF9B5E; --acc-sistemas:#4FD1C5; --acc-escritorio:#A3A6FF; --acc-investiga:#5CC3FF; --acc-verifica:#FF7A9A; --acc-malware:#FF8A7A; --acc-perifericos:#5EE0B5; --acc-imprimir:#7AA7FF; --on-accent:#0B111B;
     --ok:#4CC97F; --bad:#FF7A6E; --scrim:rgba(2,5,10,.7);
     color-scheme:dark;
   }
@@ -28,7 +28,7 @@
 :root[data-theme="dark"]{
   --bg:#0B111B; --surface:#111A27; --surface-2:#172232; --ink:#E4EAF3; --muted:#95A3B8; --line:#243246;
   --stage-1:#1C2A40; --stage-2:#0F1828; --desk:#22314A; --desk-edge:#2D4060; --shadow:rgba(0,0,0,.4);
-  --acc-partes:#6FA4FF; --acc-interior:#F07CC8; --acc-software:#4FCB8E; --acc-componentes:#FF9B5E; --acc-sistemas:#4FD1C5; --acc-escritorio:#A3A6FF; --acc-investiga:#5CC3FF; --acc-verifica:#FF7A9A; --on-accent:#0B111B;
+  --acc-partes:#6FA4FF; --acc-interior:#F07CC8; --acc-software:#4FCB8E; --acc-componentes:#FF9B5E; --acc-sistemas:#4FD1C5; --acc-escritorio:#A3A6FF; --acc-investiga:#5CC3FF; --acc-verifica:#FF7A9A; --acc-malware:#FF8A7A; --acc-perifericos:#5EE0B5; --acc-imprimir:#7AA7FF; --on-accent:#0B111B;
   --ok:#4CC97F; --bad:#FF7A6E; --scrim:rgba(2,5,10,.7);
   color-scheme:dark;
 }
@@ -40,6 +40,9 @@ body[data-view="sistemas"]{--accent:var(--acc-sistemas)}
 body[data-view="escritorio"]{--accent:var(--acc-escritorio)}
 body[data-view="investiga"]{--accent:var(--acc-investiga)}
 body[data-view="verifica"]{--accent:var(--acc-verifica)}
+body[data-view="malware"]{--accent:var(--acc-malware)}
+body[data-view="perifericos"]{--accent:var(--acc-perifericos)}
+body[data-view="imprimir"]{--accent:var(--acc-imprimir)}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -90,6 +93,10 @@ button{font:inherit; color:inherit}
 .hero-title::after{content:""; display:block; width:.9em; height:.09em; margin-top:.14em; border-radius:99px; background:linear-gradient(90deg, var(--acc-partes), var(--acc-interior), var(--acc-software))}
 .hero-sig{margin:0; font-family:var(--font-mono); font-size:13px; letter-spacing:.14em; color:var(--muted)}
 .hero-lead{margin:6px 0 0; font-size:1.12rem; max-width:42ch}
+.hero{min-height:min(76vh, 640px)}
+.hero-cta{margin:4px 0 0; display:flex; gap:8px; align-items:center; font-weight:700; color:var(--acc-partes)}
+.hero-cta svg{width:20px; height:20px; flex:none; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round}
+@media (max-width:900px){ .hero{min-height:0} .hero-cta svg{transform:rotate(90deg)} .hero-cta span::after{content:" (arriba)"} }
 .hero-art{width:100%; height:auto; display:block}
 .ha-trace{fill:none; stroke:var(--line); stroke-width:3; stroke-linecap:round; stroke-linejoin:round}
 .ha-pulse{fill:none; stroke-width:3.4; stroke-linecap:round; stroke-dasharray:14 400; animation:hapulse 4.5s linear infinite}
@@ -367,6 +374,45 @@ footer .wrap{padding-block:18px 26px; display:flex; justify-content:space-betwee
 .gcard .gfb{font-size:13.5px; color:var(--muted)}
 .gfb:empty{display:none}
 
+/* Temas 9-11 */
+.pf-n{font-family:var(--font-body); font-weight:700; font-size:13px; fill:var(--ink); text-anchor:middle}
+.pf-h{font-family:var(--font-display); font-weight:800; font-size:17px; fill:#FFFFFF}
+.worm{stroke-dasharray:60 400; animation:worm 3.2s linear infinite}
+@keyframes worm{from{stroke-dashoffset:60} to{stroke-dashoffset:-190}}
+.look{animation:look 4s ease-in-out infinite}
+@keyframes look{0%,100%{transform:translateX(0)} 30%{transform:translateX(-14px)} 65%{transform:translateX(14px)}}
+.pop{animation:popin 4.5s ease-in-out infinite} .pop.p2{animation-delay:.5s} .pop.p3{animation-delay:1s}
+@keyframes popin{0%,84%{opacity:1} 90%,96%{opacity:0} 100%{opacity:1}}
+.pw-bar{height:10px}
+.psim{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,1fr); gap:18px; align-items:start}
+@media (max-width:1000px){ .psim{grid-template-columns:minmax(0,1fr)} }
+.ps-col{display:grid; gap:10px; justify-items:center; min-width:0}
+.ps-lbl{margin:0; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+.ps-prev{height:220px; width:100%; display:grid; place-items:center; background:var(--surface-2); border-radius:14px}
+.ps-page{width:130px; aspect-ratio:21.6/27.9; background:#FFFFFF; box-shadow:0 6px 18px -6px rgba(0,0,0,.35); border-radius:2px; padding:12px; display:flex; flex-direction:column; gap:6px; transition:width .3s, filter .3s}
+.ps-page.of{aspect-ratio:21.6/34; width:112px}
+.ps-page.h{aspect-ratio:27.9/21.6; width:180px}
+.ps-page.h.of{aspect-ratio:34/21.6; width:196px}
+.ps-page b{font-family:var(--font-display); font-size:12px; color:#1B2433}
+.ps-page .ps-img{display:block; flex:1; max-height:40%; border-radius:4px; background:linear-gradient(135deg,#F97316,#D63384 50%,#2F7BE8)}
+.ps-page span{display:block; height:5px; flex:none; border-radius:3px; background:#C9D3E0} .ps-page span.s{width:60%}
+.ps-page.bn{filter:grayscale(1)}
+.ps-form{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+.ps-form .apa-f .tr-in{font-family:var(--font-body); color:var(--ink); font-weight:400; padding:8px 10px}
+.ps-dx, .ps-go{grid-column:1 / -1}
+.ps-go{justify-content:center; padding:11px 16px; font-size:15px}
+.ps-printer{position:relative; width:200px; height:190px}
+.ps-top{position:absolute; left:50px; top:0; width:100px; height:40px; background:#FFFFFF; border:1px solid #C9D3E0; border-bottom:0}
+.ps-body{position:absolute; left:10px; top:36px; width:180px; height:74px; border-radius:14px; background:linear-gradient(#E3E8EF,#C4CCD7); border:1px solid #9AA9BC}
+.ps-body i{position:absolute; right:16px; top:14px; width:10px; height:10px; border-radius:50%; background:#36D27A}
+.ps-printer.on .ps-body i{animation:blink .5s steps(2,end) infinite}
+.ps-printer.on .ps-top{animation:feed .45s linear infinite}
+@keyframes feed{50%{transform:translateY(4px)}}
+.ps-tray{position:absolute; left:40px; top:96px; width:120px; height:90px}
+.ps-sheet{position:absolute; left:0; width:120px; height:80px; border:1px solid #C9D3E0; border-radius:2px; box-shadow:0 2px 4px rgba(0,0,0,.12); background-color:#FFFFFF; background-image:linear-gradient(#C9D3E0,#C9D3E0), linear-gradient(#C9D3E0,#C9D3E0), linear-gradient(135deg,#F97316,#2F7BE8); background-size:70% 4px, 50% 4px, 30% 22px; background-position:12px 46px, 12px 56px, 12px 14px; background-repeat:no-repeat; animation:sheetout .5s ease-out both}
+.ps-sheet.bn{filter:grayscale(1)}
+@keyframes sheetout{from{transform:translateY(-40px); opacity:0} to{transform:none; opacity:1}}
+
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{animation:none !important; transition-duration:.01ms !important}
 }
@@ -391,11 +437,11 @@ footer .wrap{padding-block:18px 26px; display:flex; justify-content:space-betwee
         <p class="eyebrow">Tecnología · Secundaria</p>
         <h1 class="hero-title">Informática</h1>
         <p class="hero-sig">powered by elprofechan</p>
-        <p class="hero-lead">Conoce cómo funciona una computadora por fuera y por dentro, qué programas le dicen qué hacer, cómo usar Windows 11, cómo investigar y cómo reconocer información verdadera. Toca cada parte para ver su ficha completa.</p>
+        <p class="hero-lead">Conoce cómo funciona una computadora por fuera y por dentro, sus programas y periféricos, y aprende a usarla de forma segura e inteligente.</p>
+        <p class="hero-cta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Elige un tema en el menú para comenzar.</span></p>
       </div>
       <div><svg class="hero-art" id="hero-art" viewBox="0 0 900 560" role="img" aria-label="Ilustración de un procesador con circuitos y tarjetas flotantes de monitor, memoria RAM, código binario y software"></svg></div>
     </div>
-    <div class="cards" id="home-cards"></div>
   </div>
 </section>
 
@@ -1463,7 +1509,7 @@ const EXTRA = {
     <div class="tr-out" id="trout"></div><p class="tr-msg" id="trmsg"></p></div>`
 };
 function initExtra(kind){
-  initInv(kind);
+  initInv(kind); initMore(kind);
   if(kind==='ventana'){
     const box=$('#wdemo'), w=$('#wwin'), chip=$('#wchip'), re=$('#wreopen'), msg=$('#wmsg'), bar=w.querySelector('.wbar');
     w.addEventListener('click',e=>{const b=e.target.closest('[data-a]'); if(!b) return; const a=b.dataset.a;
@@ -1826,13 +1872,409 @@ VIEWS.verifica={
     <div class="sbox"><h3>¡Infórmate con inteligencia!</h3><p class="big-note">La información verdadera te ayuda a aprender, decidir y construir un mejor futuro.</p></div>`; }
 };
 
+/* ---------- Íconos: malware, periféricos e impresión ---------- */
+Object.assign(IC, {
+  bicho:'<ellipse cx="24" cy="27" rx="10" ry="13"/><path d="M24 14v26M18 10l3 5M30 10l-3 5M14 22H6M14 30H6M14 36l-6 4M34 22h8M34 30h8M34 36l6 4"/>',
+  gusano:'<path d="M6 32c4-10 10-10 14 0s10 10 14 0 8-8 10-6"/><circle cx="42" cy="24" r="2"/>',
+  caballo:'<path d="M12 36V24c0-4 3-7 7-7h9l4-8 8 4-3 6v17"/><path d="M12 36h25M16 36v4M33 36v4"/><circle cx="17" cy="42" r="2.5"/><circle cx="33" cy="42" r="2.5"/>',
+  rescate:'<rect x="11" y="20" width="26" height="20" rx="3"/><path d="M17 20v-5a7 7 0 0 1 14 0v5M24 27v6"/>',
+  ojo:'<path d="M3 24s8-12 21-12 21 12 21 12-8 12-21 12S3 24 3 24z"/><circle cx="24" cy="24" r="6"/>',
+  anuncio:'<rect x="5" y="9" width="30" height="22" rx="3"/><rect x="13" y="17" width="30" height="22" rx="3"/><path d="M13 23h30M36 20h.01M28 30h8"/>',
+  escaner:'<path d="M6 28h36v10H6z"/><path d="M10 28 38 10"/><path d="M12 33h14"/>',
+  microfono:'<rect x="17" y="5" width="14" height="24" rx="7"/><path d="M11 23a13 13 0 0 0 26 0M24 36v7M17 43h14"/>',
+  camara:'<circle cx="24" cy="20" r="13"/><circle cx="24" cy="20" r="5"/><path d="M16 40h16M24 33v7"/>',
+  joystick:'<path d="M14 16h20a10 10 0 0 1 10 10v4a6 6 0 0 1-11 3l-2-3H17l-2 3a6 6 0 0 1-11-3v-4a10 10 0 0 1 10-10z"/><path d="M14 22v6M11 25h6M33 23h.01M37 27h.01"/>',
+  impresora:'<rect x="5" y="18" width="38" height="16" rx="3"/><path d="M13 18V6h22v12M13 30h22v12H13z"/><path d="M37 24h.01"/>',
+  altavoz:'<rect x="11" y="4" width="26" height="40" rx="4"/><circle cx="24" cy="29" r="8"/><circle cx="24" cy="13" r="3"/>',
+  audifonos:'<path d="M8 32v-6a16 16 0 0 1 32 0v6"/><rect x="5" y="28" width="9" height="14" rx="3"/><rect x="34" y="28" width="9" height="14" rx="3"/>',
+  proyector:'<rect x="4" y="16" width="40" height="20" rx="4"/><circle cx="31" cy="26" r="6"/><path d="M10 22h8M10 28h8M12 36v4M36 36v4"/>',
+  discoext:'<rect x="6" y="12" width="36" height="24" rx="5"/><path d="M12 30h8"/><circle cx="35" cy="30" r="1.5"/>',
+  usb:'<rect x="15" y="16" width="18" height="28" rx="4"/><path d="M18 16V5h12v11M21 9h2M25 9h2"/>',
+  sd:'<path d="M12 5h18l7 7v31H12z"/><path d="M18 11v6M23 11v6M28 11v6"/>',
+  cd:'<circle cx="24" cy="24" r="19"/><circle cx="24" cy="24" r="5"/><path d="M24 12a12 12 0 0 1 12 12"/>',
+  tarjeta:'<path d="M4 10h40v22H4z"/><rect x="10" y="15" width="12" height="12" rx="1"/><path d="M28 18h10M28 24h10M8 32v6M14 32v4M20 32v4M26 32v4M32 32v4"/>',
+  inalambrico:'<rect x="6" y="20" width="22" height="14" rx="3"/><path d="M28 24h6v6h-6"/><path d="M36 14a8 8 0 0 1 0 12M40 10a14 14 0 0 1 0 20"/>',
+  pc:'<rect x="4" y="8" width="28" height="20" rx="2"/><path d="M12 36h12M18 28v8"/><rect x="36" y="8" width="9" height="30" rx="2"/>',
+  menu:'<rect x="5" y="7" width="38" height="34" rx="3"/><path d="M5 15h38M12 11h8"/><rect x="11" y="15" width="16" height="20" fill="none"/><path d="M15 21h8M15 27h8"/>',
+  cursor:'<path d="M14 6l22 16-10 2 6 12-5 2-6-12-7 7z"/>',
+  hojas:'<path d="M14 9h20v28H14z"/><path d="M10 13v28h20"/><path d="M19 17h10M19 23h10M19 29h6"/>'
+});
+
+/* ---------- Escena 9: malware ---------- */
+function sceneMalware(){
+  const tile=(id,i,draw,name,s1,s2)=>{const x=24+(i%3)*292, y=144+Math.floor(i/3)*156;
+    return `<g class="hot" data-id="${id}"><rect x="${x}" y="${y}" width="268" height="144" rx="16" class="sc-card"/>
+    <g transform="translate(${x+12} ${y+12})">${draw}</g>
+    <text x="${x+150}" y="${y+62}" class="sc-n" style="text-anchor:start">${name}</text>
+    <text x="${x+150}" y="${y+86}" class="sc-s" style="text-anchor:start">${s1}</text><text x="${x+150}" y="${y+104}" class="sc-s" style="text-anchor:start">${s2}</text></g>`};
+  const spikes=(cx,cy,r,c)=>`<g class="spin slow">${Array.from({length:8},(_,k)=>{const a=k*Math.PI/4, x1=cx+Math.cos(a)*r, y1=cy+Math.sin(a)*r, x2=cx+Math.cos(a)*(r+8), y2=cy+Math.sin(a)*(r+8); return `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="${c}" stroke-width="3" stroke-linecap="round"/><circle cx="${x2.toFixed(1)}" cy="${y2.toFixed(1)}" r="3" fill="${c}"/>`}).join('')}<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c}"/><circle cx="${cx-r*.3}" cy="${cy-r*.2}" r="${r*.18}" fill="#fff" opacity=".7"/><circle cx="${cx+r*.3}" cy="${cy-r*.2}" r="${r*.18}" fill="#fff" opacity=".7"/></g>`;
+  const virus=`<rect x="14" y="10" width="66" height="96" rx="6" fill="#F4F7FB" stroke="#9AA9BC"/><path d="M24 30h44M24 42h44M24 54h30" stroke="#B9C4D2" stroke-width="4" stroke-linecap="round"/>${spikes(92,82,20,'#E5484D')}${spikes(30,82,9,'#F07A7E')}`;
+  const nodes=[[14,30],[60,14],[110,40],[64,96],[14,104],[118,104]];
+  const gus=`${[[0,1],[1,2],[1,3],[0,4],[3,4],[3,5],[2,5]].map(([a,b])=>`<path d="M${nodes[a][0]} ${nodes[a][1]}L${nodes[b][0]} ${nodes[b][1]}" class="vf-line" stroke-width="2"/>`).join('')}${nodes.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="8" fill="#2F7BE8"/>`).join('')}<path d="M14 30 L60 14 L64 96 L118 104" fill="none" stroke="#2FA866" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" class="worm"/>`;
+  const troy=`<rect x="18" y="100" width="100" height="8" rx="3" fill="#7A4A1F"/><circle cx="32" cy="112" r="9" fill="#5A3A1A"/><circle cx="104" cy="112" r="9" fill="#5A3A1A"/>
+    <path d="M30 100V82M44 100V82M84 100V82M98 100V82" stroke="#8A5527" stroke-width="7" stroke-linecap="round"/>
+    <rect x="22" y="54" width="86" height="36" rx="16" fill="#A0652F"/><path d="M92 62 L104 22 L122 26 L112 66Z" fill="#A0652F"/><rect x="100" y="14" width="34" height="16" rx="7" fill="#A0652F" transform="rotate(12 117 22)"/><path d="M104 22 L96 34" stroke="#6B3F17" stroke-width="5" stroke-linecap="round"/><circle cx="120" cy="22" r="2.5" fill="#2A1A0A"/>
+    <rect x="46" y="62" width="26" height="20" rx="3" fill="#6B3F17"/><circle cx="59" cy="72" r="6" fill="#E5484D" class="blink"/>`;
+  const rans=`<rect x="10" y="12" width="104" height="70" rx="6" fill="#1B1F24"/><rect x="16" y="18" width="92" height="58" rx="3" fill="#1D2B4F"/>
+    <path d="M52 44v-8a10 10 0 0 1 20 0v8" fill="none" stroke="#F5C542" stroke-width="5"/><rect x="46" y="44" width="32" height="24" rx="4" fill="#F5C542"/><circle cx="62" cy="54" r="3.5" fill="#1D2B4F"/><path d="M62 56v6" stroke="#1D2B4F" stroke-width="3"/>
+    <path d="M54 82h16l4 12H50z" fill="#2A3038"/><circle cx="112" cy="98" r="17" fill="#2FA866"/><text x="112" y="104" class="vf-pill" style="font-size:17px">$</text>`;
+  const spy=`<path d="M6 60 C 30 22, 104 22, 128 60 C 104 98, 30 98, 6 60Z" fill="#F4F7FB" stroke="#7B4FD6" stroke-width="3"/><g class="look"><circle cx="67" cy="60" r="20" fill="#7B4FD6"/><circle cx="67" cy="60" r="8" fill="#1B1F24"/><circle cx="61" cy="54" r="4" fill="#fff"/></g>`;
+  const ad=`<g class="pop p1"><rect x="6" y="8" width="84" height="56" rx="6" fill="#FFF1D6" stroke="#E2A21A"/><rect x="6" y="8" width="84" height="12" rx="6" fill="#E2A21A"/><text x="48" y="48" class="vf-ad-t" style="font-size:15px; text-anchor:middle">¡GANA!</text></g>
+    <g class="pop p2"><rect x="40" y="36" width="84" height="56" rx="6" fill="#FFE1E1" stroke="#E5484D"/><rect x="40" y="36" width="84" height="12" rx="6" fill="#E5484D"/><text x="82" y="78" class="vf-ad-t" style="font-size:15px; text-anchor:middle">$$$</text></g>
+    <g class="pop p3"><rect x="20" y="66" width="84" height="50" rx="6" fill="#E3F6EA" stroke="#2FA866"/><rect x="20" y="66" width="84" height="12" rx="6" fill="#2FA866"/><text x="62" y="104" class="vf-ad-t" style="font-size:13px; text-anchor:middle">¡Clic aquí!</text></g>`;
+  return `<svg class="scene" viewBox="0 0 900 560" role="img" aria-label="Qué es el malware, sus seis clases principales y cómo protegerse">
+  <g class="hot" data-id="que">
+    <rect x="270" y="16" width="360" height="114" rx="16" class="sc-card"/>
+    <g transform="translate(296 38) scale(1.45)" fill="none" stroke="#E5484D" stroke-width="2.6" stroke-linecap="round">${IC.bicho}</g>
+    <text x="378" y="64" class="sc-n" style="text-anchor:start; font-size:20px">¿Qué es el malware?</text>
+    <text x="378" y="90" class="sc-s" style="text-anchor:start">Software malicioso: dañar, robar,</text>
+    <text x="378" y="108" class="sc-s" style="text-anchor:start">espiar o tomar el control.</text>
+  </g>
+  ${tile('virus',0,virus,'Virus','Se pega a un archivo','y se copia al abrirlo')}
+  ${tile('gusano',1,gus,'Gusanos','Se copian solos','por la red')}
+  ${tile('troyano',2,troy,'Troyanos','Se disfrazan de','programas útiles')}
+  ${tile('ransomware',3,rans,'Ransomware','Bloquea tus archivos','y pide un pago')}
+  ${tile('spyware',4,spy,'Spyware','Te espía sin','que lo sepas')}
+  ${tile('adware',5,ad,'Adware','Llena tu pantalla','de anuncios')}
+  <g class="hot" data-id="proteccion">
+    <rect x="24" y="460" width="852" height="84" rx="16" class="sc-card"/>
+    <path d="M62 478l18 7v13c0 12-8 20-18 24-10-4-18-12-18-24v-13z" fill="#1E9A57"/><path d="M54 501l6 6 11-12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="100" y="496" class="sc-n" style="text-anchor:start">¿Cómo protegerse?</text>
+    <text x="100" y="522" class="sc-s" style="text-anchor:start">Antivirus actualizado · Software al día · Nada de enlaces sospechosos · Contraseñas fuertes · Copias de seguridad</text>
+  </g>
+  </svg>`;
+}
+
+/* ---------- Escena 10: periféricos ---------- */
+const PERI_CATS=[
+  ['entrada','Periféricos de entrada','#2F7BE8',20,20,[['teclado','teclado','Teclado'],['raton','mouse','Ratón'],['escaner','escaner','Escáner'],['microfono','microfono','Micrófono'],['camara','camara','Cámara web'],['joystick','joystick','Joystick']]],
+  ['salida','Periféricos de salida','#1F9A57',560,20,[['monitorp','monitor','Monitor'],['impresora','impresora','Impresora'],['altavoces','altavoz','Altavoces'],['auriculares','audifonos','Auriculares'],['proyector','proyector','Proyector']]],
+  ['almacenamiento','Almacenamiento','#7B4FD6',20,316,[['discoext','discoext','Disco externo'],['usb','usb','Memoria USB'],['sd','sd','Tarjeta SD'],['optico','cd','Disco óptico']]],
+  ['comunicacion','Comunicación','#E2722B',560,316,[['router','router','Router'],['tarjetared','tarjeta','Tarjeta de red'],['bluetooth','inalambrico','Bluetooth']]]
+];
+function scenePerifericos(){
+  const panel=([cat,title,col,px,py,devs])=>{
+    const cols=3, cw=100;
+    const tiles=devs.map(([id,ic,name],i)=>{const cx=px+20+cw/2+(i%cols)*cw, cy=py+92+Math.floor(i/cols)*110;
+      return `<g class="hot" data-id="${id}"><rect x="${cx-48}" y="${cy-36}" width="96" height="100" fill="transparent"/>
+        <rect x="${cx-30}" y="${cy-30}" width="60" height="60" rx="16" fill="${col}"/>
+        <g transform="translate(${cx-18} ${cy-18}) scale(.75)" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${IC[ic]}</g>
+        <text x="${cx}" y="${cy+50}" class="pf-n">${name}</text></g>`}).join('');
+    return `<rect x="${px}" y="${py}" width="320" height="264" rx="18" class="sc-card"/>
+      <g class="hot" data-id="${cat}"><path d="M${px+18} ${py}h284a18 18 0 0 1 18 18v28H${px}V${py+18}a18 18 0 0 1 18-18z" fill="${col}"/><text x="${px+20}" y="${py+30}" class="pf-h">${title}</text><text x="${px+300}" y="${py+30}" class="pf-h" style="text-anchor:end">ⓘ</text></g>${tiles}`};
+  return `<svg class="scene" viewBox="0 0 900 600" role="img" aria-label="Computadora central rodeada de periféricos de entrada, salida, almacenamiento y comunicación">
+  <path d="M340 150 C 380 150, 380 250, 400 262" fill="none" stroke="#2F7BE8" stroke-width="4" class="flow rev"/>
+  <path d="M500 262 C 520 250, 520 150, 560 150" fill="none" stroke="#1F9A57" stroke-width="4" class="flow"/>
+  <path d="M340 450 C 380 450, 380 360, 400 350" fill="none" stroke="#7B4FD6" stroke-width="4" stroke-dasharray="6 14"/>
+  <path d="M500 350 C 520 360, 520 450, 560 450" fill="none" stroke="#E2722B" stroke-width="4" stroke-dasharray="6 14"/>
+  <g class="hot" data-id="central">
+    <rect x="360" y="226" width="180" height="150" fill="transparent"/>
+    <rect x="372" y="236" width="104" height="72" rx="8" fill="#1B1F24"/><rect x="378" y="242" width="92" height="58" rx="3" fill="#2F7BE8"/>
+    <rect x="404" y="256" width="40" height="30" rx="4" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M412 250v6M424 250v6M436 250v6M412 286v6M424 286v6M436 286v6" stroke="#fff" stroke-width="2"/>
+    <path d="M416 308h16l3 14h-22z" fill="#2A3038"/><rect x="402" y="320" width="44" height="6" rx="3" fill="#2A3038"/>
+    <rect x="488" y="232" width="40" height="96" rx="6" fill="#262C35" stroke="#3B4452"/><circle cx="508" cy="250" r="5" fill="none" stroke="#3DA9FF" stroke-width="2" class="glow"/><path d="M496 268h24M496 276h24" stroke="#3B4452" stroke-width="3"/>
+    <text x="450" y="352" class="pf-n" style="font-size:14px">Computadora central</text>
+    <text x="450" y="370" class="sc-s" style="font-size:11.5px">CPU, memoria, placa base…</text>
+  </g>
+  ${PERI_CATS.map(panel).join('')}
+  </svg>`;
+}
+
+/* ---------- Escena 11: ruta de impresión ---------- */
+function sceneImprimir(){
+  const road='M150 150 H 730 C 830 150, 830 410, 730 410 H 150';
+  const st=[['prepara',170,150,'#2F7BE8','documento','Prepara el','documento'],['menu',450,150,'#F97316','menu','Accede al','menú de impresión'],['selecciona',730,150,'#16A34A','impresora','Selecciona','la impresora'],
+            ['ajusta',730,410,'#7A3FC2','engrane','Ajusta las','configuraciones'],['clic',450,410,'#2563EB','cursor','Haz clic en','Imprimir'],['recoge',170,410,'#D63384','hojas','Recoge tus','páginas']];
+  const stations=st.map(([id,x,y,c,ic,l1,l2],i)=>`<g class="hot" data-id="${id}">
+    <rect x="${x-90}" y="${y-56}" width="180" height="160" fill="transparent"/>
+    <circle cx="${x}" cy="${y}" r="50" fill="${c}"/><circle cx="${x}" cy="${y}" r="50" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3"/>
+    <g transform="translate(${x-22} ${y-22}) scale(.9167)" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${IC[ic]}</g>
+    <circle cx="${x-38}" cy="${y-38}" r="17" class="inv-badge" stroke="${c}"/><text x="${x-38}" y="${y-32}" class="inv-num" style="fill:${c}">${i+1}</text>
+    <text x="${x}" y="${y+76}" class="sc-n">${l1}</text><text x="${x}" y="${y+96}" class="sc-n">${l2}</text></g>`).join('');
+  return `<svg class="scene" viewBox="0 0 900 560" role="img" aria-label="Ruta con los 6 pasos para imprimir un documento">
+  <path d="${road}" class="inv-road"/><path d="${road}" class="inv-lane"/>
+  <circle r="9" class="inv-walker" style="offset-path:path('${road}')"/>
+  <g transform="translate(40 384)"><rect x="6" y="20" width="52" height="24" rx="5" fill="#DDE3EB" stroke="#9AA9BC"/><rect x="16" y="4" width="32" height="18" fill="#fff" stroke="#9AA9BC"/><rect x="16" y="38" width="32" height="20" fill="#fff" stroke="#9AA9BC"/><path d="M22 46h20M22 51h14" stroke="#B9C4D2" stroke-width="2"/></g>
+  <text x="72" y="470" class="sc-s" style="font-weight:700">¡Listo!</text>
+  ${stations}
+  </svg>`;
+}
+
+/* ---------- Juegos de tarjetas genéricos ---------- */
+function cardsGameHTML(id,title,intro,data,opts){return `<div class="sbox span3"><h3>${title}</h3><p>${intro}</p>
+  <div class="game" id="${id}">${data.map((g,i)=>`<div class="gcard" data-i="${i}"><p>${g[0]}</p><div class="gbtns">${opts.map((o,k)=>`<button type="button" class="btn" data-a="${k}">${o}</button>`).join('')}</div><p class="gfb" aria-live="polite"></p></div>`).join('')}</div>
+  <p class="fb" id="${id}-score"></p></div>`}
+function initCardsGame(id,data,opts){
+  const box=$('#'+id); if(!box) return; let ok=0, done=0;
+  box.addEventListener('click',e=>{const b=e.target.closest('[data-a]'); if(!b) return; const c=b.closest('.gcard'); if(c.dataset.done) return;
+    const g=data[+c.dataset.i], right=+b.dataset.a===g[1]; c.dataset.done=1; done++; if(right) ok++;
+    c.classList.add(right?'gok':'gbad'); b.classList.add('solid');
+    c.querySelector('.gfb').innerHTML=`<b>${right?'¡Correcto!':'No exactamente.'}</b> Es <b>${opts[g[1]]}</b>: ${g[2]}`;
+    c.querySelectorAll('[data-a]').forEach(x=>x.disabled=true);
+    if(done===data.length){const s=$('#'+id+'-score'); s.className='fb ok'; s.textContent=`Resultado: ${ok} de ${data.length}. ${ok===data.length?'¡Excelente!':'Repasa las fichas y vuelve a intentarlo.'}`}
+  });
+}
+const MAL_OPTS=['Virus','Gusano','Troyano','Ransomware','Spyware','Adware'];
+const MAL_GAME=[
+  ['Aparece un mensaje: «Tus archivos están bloqueados. Paga para recuperarlos».',3,'cifra los archivos y exige un rescate.'],
+  ['Descargaste un «juego gratis» de una página rara y en secreto instaló un programa que roba contraseñas.',2,'se disfrazó de algo útil para que tú mismo lo instalaras.'],
+  ['El navegador se llena de ventanas de anuncios que nunca pediste.',5,'muestra anuncios no deseados y excesivos.'],
+  ['Un programa oculto guarda todo lo que escribes con el teclado.',4,'es un keylogger, un tipo de spyware que recopila tu información.'],
+  ['Una amenaza pasa sola de computadora en computadora por la red de la escuela, sin que nadie abra nada.',1,'se propaga por sí mismo a través de la red.'],
+  ['Al abrir un documento infectado, el código malicioso se copia a otros archivos.',0,'se adjunta a archivos legítimos y se replica al ejecutarse.']
+];
+const PER_OPTS=['Entrada','Salida','Almacenamiento','Comunicación','Entrada y salida'];
+const PER_GAME=[
+  ['Pantalla táctil',4,'muestra la imagen (salida) y recibe tus toques (entrada).'],
+  ['Escáner',0,'convierte documentos en papel en imágenes para la computadora.'],
+  ['Proyector',1,'muestra en grande la información de la computadora.'],
+  ['Memoria USB',2,'guarda archivos para usarlos después.'],
+  ['Adaptador Bluetooth',3,'conecta la computadora con dispositivos inalámbricos.'],
+  ['Audífonos con micrófono',4,'escuchas por los audífonos (salida) y hablas por el micrófono (entrada).'],
+  ['Cámara web',0,'manda tu imagen a la computadora.'],
+  ['Impresora multifuncional',4,'imprime (salida) y también escanea (entrada).']
+];
+
+/* ---------- Bloques interactivos extra ---------- */
+Object.assign(EXTRA, {
+  pass:()=>`<div class="box wide"><h3>Prueba qué tan fuerte es una contraseña</h3>
+    <input class="tr-in" id="pw-in" type="text" autocomplete="off" spellcheck="false" value="perro123" aria-label="Contraseña de ejemplo">
+    <p class="tr-msg">Escribe una contraseña inventada, <b>nunca la tuya real</b>. Nada se guarda ni se envía.</p>
+    <div class="progress pw-bar"><i id="pw-bar"></i></div>
+    <p class="fb" id="pw-lvl"></p><ul class="ticks" id="pw-tips"></ul></div>`
+});
+function initMore(kind){
+  if(kind!=='pass') return;
+  const inp=$('#pw-in');
+  const upd=()=>{const v=inp.value; const tests=[[v.length>=8,'Usa al menos 8 caracteres.'],[v.length>=12,'Mejor aún: 12 caracteres o más (una frase larga funciona muy bien).'],[/[a-z]/.test(v)&&/[A-Z]/.test(v),'Combina mayúsculas y minúsculas.'],[/\d/.test(v),'Agrega números.'],[/[^A-Za-z0-9]/.test(v),'Agrega símbolos como ! # $ o espacios.']];
+    let sc=tests.filter(t=>t[0]).length; const common=/^(123456|12345678|password|contrase(n|ñ)a|qwerty|111111|abc123)/i.test(v); if(common) sc=0;
+    const lv=[['Muy débil','var(--bad)'],['Muy débil','var(--bad)'],['Débil','#E2722B'],['Regular','#D99A12'],['Fuerte','var(--ok)'],['Muy fuerte','var(--ok)']][sc];
+    $('#pw-bar').style.width=(v?Math.max(8,sc*20):0)+'%'; $('#pw-bar').style.background=lv[1];
+    $('#pw-lvl').textContent=v?`Nivel: ${lv[0]}${common?' (es de las contraseñas más usadas del mundo)':''}`:'';
+    $('#pw-tips').innerHTML=tests.filter(t=>!t[0]).map(t=>`<li>${TICK}<span>${t[1]}</span></li>`).join('') + (v?`<li>${TICK}<span>No uses tu nombre, tu fecha de nacimiento ni la misma contraseña en todos lados.</span></li>`:'');};
+  inp.addEventListener('input',upd); upd();
+}
+
+/* ---------- Simulador de impresión ---------- */
+function printSimHTML(){return `<div class="sbox span3" id="psim-box"><h3>Simulador: imprime tu documento</h3>
+  <div class="psim">
+    <div class="ps-col"><p class="ps-lbl">Vista previa · Mi tarea.docx</p><div class="ps-prev"><div class="ps-page" id="ps-page"><b>Mi tarea</b><i class="ps-img"></i><span></span><span></span><span></span><span class="s"></span></div></div><p class="tr-msg" id="ps-info"></p></div>
+    <form class="ps-form" id="ps-form">
+      <label class="apa-f">Impresora<select class="tr-in" id="ps-pr"><option>Impresora del salón</option><option>Impresora de la biblioteca</option><option value="pdf">Guardar como PDF</option></select></label>
+      <label class="apa-f">Copias<input class="tr-in" id="ps-cp" type="number" min="1" max="20" value="1"></label>
+      <label class="apa-f">Páginas<select class="tr-in" id="ps-pg"><option value="3">Todas (1 a 3)</option><option value="1">Solo la página 1</option><option value="2">Páginas 2 a 3</option></select></label>
+      <label class="apa-f">Orientación<select class="tr-in" id="ps-or"><option value="v">Vertical</option><option value="h">Horizontal</option></select></label>
+      <label class="apa-f">Tamaño de papel<select class="tr-in" id="ps-sz"><option value="carta">Carta</option><option value="oficio">Oficio</option></select></label>
+      <label class="apa-f">Color<select class="tr-in" id="ps-co"><option value="c">A color</option><option value="bn">Blanco y negro</option></select></label>
+      <label class="cl-i ps-dx" for="ps-dx"><input type="checkbox" id="ps-dx"><span>Imprimir por ambas caras</span></label>
+      <button type="submit" class="btn solid ps-go">Imprimir</button>
+    </form>
+    <div class="ps-col"><p class="ps-lbl">Bandeja de la impresora</p>
+      <div class="ps-printer" id="ps-printer"><div class="ps-top"></div><div class="ps-body"><i></i></div><div class="ps-tray" id="ps-tray"></div></div>
+      <p class="fb" id="ps-msg" aria-live="polite">Ajusta las opciones y presiona Imprimir.</p></div>
+  </div>
+  <p class="tr-msg">En este tema también puedes presionar <span class="kbd">Ctrl</span> + <span class="kbd">P</span> para venir directo al simulador.</p></div>`}
+function initPrintSim(){
+  const f=$('#ps-form'); if(!f) return; const g=id=>$('#'+id);
+  const prev=()=>{const pg=g('ps-page'); pg.classList.toggle('h', g('ps-or').value==='h'); pg.classList.toggle('of', g('ps-sz').value==='oficio'); pg.classList.toggle('bn', g('ps-co').value==='bn');
+    const n=+g('ps-pg').value, c=Math.max(1,Math.min(20,+g('ps-cp').value||1)), dx=g('ps-dx').checked, hojas=(dx?Math.ceil(n/2):n)*c;
+    g('ps-info').textContent = g('ps-pr').value==='pdf' ? `Se creará un archivo PDF de ${n} ${n===1?'página':'páginas'}.` : `Usará ${hojas} ${hojas===1?'hoja':'hojas'} de papel ${g('ps-sz').value}.`};
+  f.addEventListener('input',prev); f.addEventListener('change',prev);
+  f.addEventListener('submit',e=>{e.preventDefault();
+    const n=+g('ps-pg').value, c=Math.max(1,Math.min(20,+g('ps-cp').value||1)), dx=g('ps-dx').checked, hojas=(dx?Math.ceil(n/2):n)*c, pdf=g('ps-pr').value==='pdf';
+    const tray=g('ps-tray'), pr=g('ps-printer'), msg=g('ps-msg'); tray.innerHTML=''; msg.className='fb';
+    if(pdf){ msg.className='fb ok'; msg.textContent=`Se guardó «Mi tarea.pdf» con ${n} ${n===1?'página':'páginas'}. No se usó papel.`; return }
+    pr.classList.add('on'); msg.textContent='Imprimiendo…';
+    const show=Math.min(hojas,8);
+    for(let i=0;i<show;i++){const s=document.createElement('i'); s.className='ps-sheet'+(g('ps-co').value==='bn'?' bn':''); s.style.animationDelay=(i*0.45)+'s'; s.style.bottom=(i*3)+'px'; tray.appendChild(s)}
+    setTimeout(()=>{pr.classList.remove('on'); msg.className='fb ok';
+      msg.textContent=`Listo: ${hojas} ${hojas===1?'hoja':'hojas'} (${n} ${n===1?'página':'páginas'} × ${c} ${c===1?'copia':'copias'}${dx?', por ambas caras':''}) en tamaño ${g('ps-sz').value}, ${g('ps-or').value==='v'?'vertical':'horizontal'}, ${g('ps-co').value==='c'?'a color':'en blanco y negro'}, en la ${g('ps-pr').value.toLowerCase()}.`},show*450+500);
+  });
+  prev();
+}
+document.addEventListener('keydown',e=>{
+  if(cur!=='imprimir' || !(e.ctrlKey||e.metaKey) || e.key.toLowerCase()!=='p') return;
+  e.preventDefault(); closeSheet(false); const b=$('#psim-box'); if(!b) return;
+  b.scrollIntoView({behavior:'smooth', block:'start'}); const m=$('#ps-msg'); m.className='fb ok'; m.textContent='¡Bien! Ctrl + P abre el menú de impresión. Ahora ajusta las opciones.'; setTimeout(()=>$('#ps-pr').focus({preventScroll:true}),400);
+});
+
+/* ---------- Contenido de los temas 9 a 11 ---------- */
+VIEWS.malware={
+  menu:'Malware y virus', menuSub:'Seguridad informática', icon:'bicho', accentVar:'--acc-malware',
+  eyebrow:'Tema 9 · Seguridad informática', title:'¿Qué es un malware y otras clases de virus?',
+  lead:'El malware es software malicioso que puede dañar tu equipo o robar tu información. Toca cada tipo para conocer cómo actúa y cómo protegerte.',
+  scene:sceneMalware, vb:[900,560], pins:{},
+  items:[
+    {id:'que', name:'¿Qué es el malware?', color:'#E5484D', icon:'bicho', kind:'Software malicioso',
+      lead:'Malware (software malicioso) es cualquier software diseñado para dañar, interrumpir o tomar el control de un sistema informático.',
+      funcs:['Robar información','Robar dinero','Espiar','Sabotear'],
+      ejemplo:'Un programa que llega en un archivo adjunto y, al abrirlo, roba las contraseñas guardadas en el navegador.',
+      more:['La palabra viene del inglés <b>mal</b>icious soft<b>ware</b>.','Mucha gente le dice “virus” a todo el malware, pero el virus es solo una de sus clases.','Puede llegar por correos, descargas, memorias USB, anuncios engañosos o programas piratas.','Señales de alerta: el equipo se pone muy lento, aparecen ventanas o programas que no instalaste, o tus archivos cambian de nombre.']},
+    {id:'virus', name:'Virus informáticos', color:'#E5484D', icon:'bicho', kind:'Clase de malware',
+      lead:'Se adjunta a un archivo o programa legítimo y se replica al ejecutarse.',
+      funcs:['Necesita que alguien abra el archivo infectado','Se copia a otros archivos','Puede dañar o borrar información'],
+      ejemplo:'Virus de macro (escondidos en documentos de oficina) y virus de arranque (se cargan al encender el equipo).',
+      more:['Se llama así porque, como un virus biológico, necesita un “huésped” (un archivo) para multiplicarse.','Revisa con el antivirus las memorias USB antes de abrir sus archivos.']},
+    {id:'gusano', name:'Gusanos (worms)', color:'#2FA866', icon:'gusano', kind:'Clase de malware',
+      lead:'Se propaga por sí mismo a través de redes, sin necesidad de interacción humana o un archivo portador.',
+      funcs:['Se copia solo de equipo en equipo','Aprovecha fallas de seguridad','Puede saturar una red completa'],
+      ejemplo:'Conficker y Stuxnet son gusanos conocidos que se extendieron por millones de computadoras y sistemas.',
+      more:['A diferencia del virus, no necesita que abras nada.','Por eso es tan importante instalar las <b>actualizaciones</b>: corrigen las fallas que usan los gusanos.']},
+    {id:'troyano', name:'Troyanos (trojans)', color:'#A0652F', icon:'caballo', kind:'Clase de malware',
+      lead:'Se disfraza de software legítimo y útil para engañar al usuario e instalarse.',
+      funcs:['Parece un programa normal o un juego gratis','Tú mismo lo instalas sin saberlo','Abre la puerta a otros ataques'],
+      ejemplo:'Robo de credenciales (usuarios y contraseñas) y puertas traseras que permiten controlar el equipo a distancia.',
+      more:['Su nombre viene del caballo de Troya de la mitología griega: un regalo que escondía soldados.','Descarga programas solo de sus sitios oficiales o de tiendas confiables.']},
+    {id:'ransomware', name:'Ransomware', color:'#D99A12', icon:'rescate', kind:'Clase de malware',
+      lead:'Cifra los archivos del usuario y exige un rescate (pago) para desbloquearlos.',
+      funcs:['Bloquea tus fotos, documentos y trabajos','Pide dinero a cambio de la clave','Puede afectar a escuelas, hospitales y empresas'],
+      ejemplo:'WannaCry y Ryuk afectaron a miles de organizaciones en todo el mundo.',
+      more:['<i>Ransom</i> significa “rescate” en inglés.','La mejor defensa es tener <b>copias de seguridad</b>: si tienes respaldo, no pierdes tus archivos.','Pagar no garantiza que devuelvan los archivos.']},
+    {id:'spyware', name:'Spyware', color:'#7B4FD6', icon:'ojo', kind:'Clase de malware',
+      lead:'Recopila información sobre las actividades del usuario sin su consentimiento.',
+      funcs:['Vigila lo que haces','Roba datos personales','Envía la información a otra persona'],
+      ejemplo:'Keyloggers (registran lo que escribes en el teclado) y robo de identidad.',
+      more:['<i>Spy</i> significa “espía”.','Ten cuidado al escribir contraseñas en computadoras públicas o de un café internet.']},
+    {id:'adware', name:'Adware', color:'#E2A21A', icon:'anuncio', kind:'Clase de malware',
+      lead:'Muestra anuncios no deseados y excesivos, a menudo de manera intrusiva.',
+      funcs:['Llena la pantalla de publicidad','Cambia la página de inicio del navegador','Hace lento el equipo'],
+      ejemplo:'Banners y ventanas emergentes (pop-ups) que aparecen aunque no estés navegando.',
+      more:['<i>Ad</i> viene de <i>advertisement</i>, “anuncio”.','Suele instalarse junto con programas gratuitos: lee cada paso al instalar y desmarca lo que no pediste.']},
+    {id:'proteccion', name:'¿Cómo protegerse?', color:'#1E9A57', icon:'escudo2', kind:'Prevención',
+      lead:'Con hábitos sencillos puedes evitar la mayoría de los ataques.',
+      funcs:['Usa antivirus actualizado','Mantén el software al día','No hagas clic en enlaces sospechosos','Usa contraseñas fuertes','Haz copias de seguridad'],
+      ejemplo:'Antes de abrir un archivo que te mandaron por mensaje, pregúntale a la persona si de verdad te lo envió.',
+      more:['Descarga programas solo de sitios oficiales.','No conectes memorias USB desconocidas.','Activa la verificación en dos pasos en tus cuentas.'],
+      extra:'pass', rel:[['software','antivirus','Ver la ficha del antivirus']]}
+  ],
+  quiz:{que:'la definición de software malicioso', virus:'el que se adjunta a un archivo y se replica al abrirlo', gusano:'el que se propaga solo por la red', troyano:'el que se disfraza de programa útil', ransomware:'el que bloquea tus archivos y pide un pago', spyware:'el que espía tus actividades', adware:'el que llena de anuncios la pantalla', proteccion:'los hábitos para protegerte'},
+  after(){ initCardsGame('mal-game',MAL_GAME,MAL_OPTS) },
+  summary(){ return `
+    <div class="sbox span2"><h3>Las seis clases, de un vistazo</h3><div class="tbl-wrap"><table>
+      <thead><tr><th>Clase</th><th>¿Qué hace?</th><th>Ejemplos</th></tr></thead><tbody>
+      <tr><th>Virus</th><td>Se pega a un archivo y se copia al abrirlo</td><td>Virus de macro, de arranque</td></tr>
+      <tr><th>Gusano</th><td>Se propaga solo por la red</td><td>Conficker, Stuxnet</td></tr>
+      <tr><th>Troyano</th><td>Se disfraza de programa útil</td><td>Robo de credenciales, puertas traseras</td></tr>
+      <tr><th>Ransomware</th><td>Cifra archivos y pide rescate</td><td>WannaCry, Ryuk</td></tr>
+      <tr><th>Spyware</th><td>Recopila tu información sin permiso</td><td>Keyloggers, robo de identidad</td></tr>
+      <tr><th>Adware</th><td>Muestra anuncios excesivos</td><td>Banners, pop-ups</td></tr></tbody></table></div></div>
+    <div class="sbox"><h3>¿Cómo protegerse?</h3><ul class="ticks"><li>${TICK}<span>Usa antivirus actualizado.</span></li><li>${TICK}<span>Mantén el software al día.</span></li><li>${TICK}<span>No hagas clic en enlaces sospechosos.</span></li><li>${TICK}<span>Usa contraseñas fuertes.</span></li><li>${TICK}<span>Haz copias de seguridad.</span></li></ul></div>
+    ${cardsGameHTML('mal-game','Juego: ¿qué tipo de malware es?','Lee cada caso inventado y elige la clase de malware.',MAL_GAME,MAL_OPTS)}`; }
+};
+
+const PERI_ITEMS=[
+  {id:'entrada', name:'Periféricos de entrada', color:'#2F7BE8', icon:'teclado', kind:'Categoría',
+    lead:'Permiten ingresar datos e instrucciones a la computadora.',
+    funcs:['Teclado','Ratón','Escáner','Micrófono','Cámara web','Joystick o control de juego'],
+    ejemplo:'Cuando hablas en una videollamada, el micrófono y la cámara mandan tu voz y tu imagen a la computadora.',
+    more:['La información va <b>de ti hacia la computadora</b>.']},
+  {id:'teclado', name:'Teclado', color:'#2F7BE8', icon:'teclado', kind:'Periférico de entrada', lead:'Sirve para escribir texto y dar órdenes con teclas y atajos.', funcs:['Escribir y editar texto','Usar atajos de teclado'], ejemplo:'Escribes tu tarea en un procesador de textos.', more:['Puede conectarse por cable USB o de forma inalámbrica.'], rel:[['partes','teclado','Ver la ficha completa del teclado']]},
+  {id:'raton', name:'Ratón', color:'#2F7BE8', icon:'mouse', kind:'Periférico de entrada', lead:'Mueve el cursor en la pantalla y permite seleccionar con clics.', funcs:['Mover el cursor','Seleccionar y abrir elementos'], ejemplo:'Das doble clic en una carpeta para abrirla.', more:['En México le decimos casi siempre <b>mouse</b>.'], rel:[['partes','mouse','Ver la ficha completa del mouse']]},
+  {id:'escaner', name:'Escáner', color:'#2F7BE8', icon:'escaner', kind:'Periférico de entrada', lead:'Convierte documentos y fotos en papel en imágenes digitales.', funcs:['Digitalizar documentos','Guardar fotos impresas en la computadora'], ejemplo:'Escaneas tu acta de nacimiento para subirla a un trámite en línea.', more:['Con un programa de reconocimiento de texto (OCR), lo escaneado se puede convertir en texto editable.','Muchas impresoras multifuncionales también escanean.']},
+  {id:'microfono', name:'Micrófono', color:'#2F7BE8', icon:'microfono', kind:'Periférico de entrada', lead:'Capta tu voz y otros sonidos para grabarlos o transmitirlos.', funcs:['Grabar audio','Hablar en videollamadas','Dar órdenes por voz'], ejemplo:'Grabas un podcast para la clase.', more:['Muchas laptops y audífonos ya traen micrófono integrado.']},
+  {id:'camara', name:'Cámara web', color:'#2F7BE8', icon:'camara', kind:'Periférico de entrada', lead:'Captura imagen y video en tiempo real.', funcs:['Videollamadas y clases en línea','Tomar fotos o grabar video'], ejemplo:'Te conectas a una clase en línea y tus compañeros te ven.', more:['Por privacidad, tápala o desconéctala cuando no la uses.']},
+  {id:'joystick', name:'Joystick / control de juego', color:'#2F7BE8', icon:'joystick', kind:'Periférico de entrada', lead:'Sirve para controlar videojuegos y simuladores.', funcs:['Mover personajes','Controlar simuladores de manejo o vuelo'], ejemplo:'Usas un control para jugar en la computadora.', more:['Hay de varios tipos: gamepad, palanca y volante.']},
+  {id:'salida', name:'Periféricos de salida', color:'#1F9A57', icon:'monitor', kind:'Categoría',
+    lead:'Muestran o proyectan la información procesada por la computadora.',
+    funcs:['Monitor o pantalla','Impresora','Altavoces o parlantes','Auriculares','Proyector'],
+    ejemplo:'Imprimes tu trabajo y lo ves antes en el monitor.',
+    more:['La información va <b>de la computadora hacia ti</b>.']},
+  {id:'monitorp', name:'Monitor / pantalla', color:'#1F9A57', icon:'monitor', kind:'Periférico de salida', lead:'Muestra textos, imágenes, videos y todo lo que hace la computadora.', funcs:['Mostrar la información','Permitir trabajar con ventanas'], ejemplo:'Ves tu presentación antes de exponerla.', rel:[['partes','monitor','Ver la ficha completa del monitor']]},
+  {id:'impresora', name:'Impresora', color:'#1F9A57', icon:'impresora', kind:'Periférico de salida', lead:'Pasa a papel los documentos e imágenes de la computadora.', funcs:['Imprimir documentos','Imprimir fotos'], ejemplo:'Imprimes la portada de tu trabajo.', more:['Las de <b>inyección de tinta</b> usan cartuchos de tinta; las <b>láser</b> usan tóner (polvo).','Una impresora <b>multifuncional</b> también escanea y copia: es de entrada y de salida.'], rel:[['imprimir','Ver cómo imprimir un documento']]},
+  {id:'altavoces', name:'Altavoces / parlantes', color:'#1F9A57', icon:'altavoz', kind:'Periférico de salida', lead:'Reproducen el sonido para que todos lo escuchen.', funcs:['Reproducir música y videos','Escuchar alertas del sistema'], ejemplo:'Pones un video en clase y todo el grupo lo escucha.', more:['En México también les decimos <b>bocinas</b>.']},
+  {id:'auriculares', name:'Auriculares', color:'#1F9A57', icon:'audifonos', kind:'Periférico de salida', lead:'Reproducen el sonido solo para ti.', funcs:['Escuchar sin molestar a otros','Concentrarte en una actividad'], ejemplo:'Escuchas un audio de inglés en el laboratorio sin molestar a tus compañeros.', more:['También se llaman <b>audífonos</b>.','Si traen micrófono, son de entrada y de salida.','Cuida tus oídos: no los uses a todo volumen.']},
+  {id:'proyector', name:'Proyector', color:'#1F9A57', icon:'proyector', kind:'Periférico de salida', lead:'Muestra la imagen de la computadora en grande sobre una pared o pantalla.', funcs:['Presentaciones','Ver videos en grupo'], ejemplo:'Proyectas tu exposición en el salón.', more:['Se conecta normalmente con un cable HDMI.']},
+  {id:'almacenamiento', name:'Periféricos de almacenamiento', color:'#7B4FD6', icon:'discoext', kind:'Categoría',
+    lead:'Guardan información y datos para su uso futuro.',
+    funcs:['Disco duro externo','Memoria USB','Tarjeta de memoria','Disco óptico'],
+    ejemplo:'Guardas una copia de tus trabajos en una memoria USB.',
+    more:['Son portátiles: puedes llevar tus archivos a otra computadora.','Sirven para hacer <b>copias de seguridad</b>.']},
+  {id:'discoext', name:'Disco duro externo', color:'#7B4FD6', icon:'discoext', kind:'Periférico de almacenamiento', lead:'Guarda grandes cantidades de archivos y se lleva a cualquier lado.', funcs:['Respaldar toda tu información','Guardar videos y fotos pesados'], ejemplo:'Haces un respaldo de todas las fotos de la escuela.', more:['Suelen tener de 1 a 5 TB.']},
+  {id:'usb', name:'Memoria USB', color:'#7B4FD6', icon:'usb', kind:'Periférico de almacenamiento', lead:'Pequeña memoria portátil que se conecta a un puerto USB.', funcs:['Llevar archivos de una computadora a otra','Entregar trabajos'], ejemplo:'Llevas tu presentación en la USB para abrirla en la computadora del salón.', more:['Antes de desconectarla, usa “Expulsar” para no dañar los archivos.','Puede contagiar malware: revísala con el antivirus.'], rel:[['malware','Ver el tema de malware']]},
+  {id:'sd', name:'Tarjeta de memoria', color:'#7B4FD6', icon:'sd', kind:'Periférico de almacenamiento', lead:'Tarjeta pequeña que guarda fotos y videos en cámaras, celulares y tabletas.', funcs:['Ampliar el espacio de un celular','Guardar fotos de una cámara'], ejemplo:'Pasas las fotos de una cámara a la computadora con un lector de tarjetas.', more:['Las más comunes son SD y microSD.']},
+  {id:'optico', name:'Disco óptico', color:'#7B4FD6', icon:'cd', kind:'Periférico de almacenamiento', lead:'Disco que se lee con un rayo láser: CD, DVD o Blu-ray.', funcs:['Guardar música, películas o programas'], ejemplo:'Algunas películas y videojuegos todavía se venden en disco.', more:['Un CD guarda unos 700 MB, un DVD 4.7 GB y un Blu-ray 25 GB.','Hoy casi no se usan: las memorias USB y la nube los reemplazaron.']},
+  {id:'comunicacion', name:'Periféricos de comunicación', color:'#E2722B', icon:'router', kind:'Categoría',
+    lead:'Permiten conectar la computadora a redes y otros dispositivos.',
+    funcs:['Módem / router','Tarjeta de red','Adaptador Bluetooth'],
+    ejemplo:'El router de la escuela conecta las computadoras del laboratorio a internet.',
+    more:['Envían y reciben información, así que trabajan en ambos sentidos.']},
+  {id:'router', name:'Módem / router', color:'#E2722B', icon:'router', kind:'Periférico de comunicación', lead:'Reparte la conexión a internet entre los dispositivos, por cable o Wi-Fi.', funcs:['Conectarse a internet','Crear la red Wi-Fi'], ejemplo:'El router de tu casa da internet a tu celular y a tu computadora.', more:['El <b>módem</b> recibe el internet de la compañía; el <b>router</b> lo reparte. Muchas veces vienen en un solo aparato.']},
+  {id:'tarjetared', name:'Tarjeta de red', color:'#E2722B', icon:'tarjeta', kind:'Periférico de comunicación', lead:'Permite que la computadora se conecte a una red por cable o por Wi-Fi.', funcs:['Conectarse por cable (Ethernet)','Conectarse por Wi-Fi'], ejemplo:'La computadora del salón se conecta al internet de la escuela.', more:['Normalmente va dentro del gabinete, aunque también hay adaptadores USB.'], rel:[['componentes','red','Ver la tarjeta de red por dentro']]},
+  {id:'bluetooth', name:'Adaptador Bluetooth', color:'#E2722B', icon:'inalambrico', kind:'Periférico de comunicación', lead:'Conecta dispositivos inalámbricos cercanos, como audífonos, bocinas o teclados.', funcs:['Conectar audífonos y bocinas sin cables','Pasar archivos a otros dispositivos cercanos'], ejemplo:'Conectas tus audífonos inalámbricos a la computadora.', more:['Funciona a distancias cortas, de unos 10 metros.']},
+  {id:'central', name:'Computadora central', color:'#3B4452', icon:'pc', kind:'El centro de todo',
+    lead:'Es la computadora en sí (CPU, memoria, placa base, etc.). Recibe datos de los periféricos de entrada, los procesa y manda resultados a los de salida.',
+    funcs:['Recibir datos de los periféricos de entrada','Procesarlos','Enviar resultados a los periféricos de salida','Guardar o compartir información con los demás periféricos'],
+    ejemplo:'Escribes con el teclado (entrada), la computadora lo procesa y lo ves en el monitor (salida).',
+    more:['Un <b>periférico</b> es cualquier dispositivo externo que se conecta a la computadora para darle más funciones.','Algunos son <b>mixtos</b> (entrada y salida): la pantalla táctil, la impresora multifuncional y los audífonos con micrófono.'],
+    rel:[['componentes','Ver los componentes internos']]}
+];
+VIEWS.perifericos={
+  menu:'Periféricos', menuSub:'Dispositivos externos', icon:'usb', accentVar:'--acc-perifericos',
+  eyebrow:'Tema 10 · Periféricos', title:'Los periféricos de una computadora',
+  lead:'Guía visual de dispositivos externos. Toca cada periférico, o el título de cada grupo, para ver su ficha.',
+  scene:scenePerifericos, vb:[900,600], pins:{}, quizMax:8,
+  items:PERI_ITEMS,
+  quiz:{teclado:'el periférico de entrada para escribir', raton:'el que mueve el cursor', escaner:'el que convierte papel en imagen digital', microfono:'el que capta tu voz', camara:'el que te graba en videollamadas', joystick:'el control para videojuegos', monitorp:'la pantalla donde ves la información', impresora:'el que pasa tus documentos a papel', altavoces:'los que reproducen sonido para todos', auriculares:'los que reproducen sonido solo para ti', proyector:'el que muestra la imagen en grande en la pared', discoext:'el disco portátil para respaldar mucha información', usb:'la memoria pequeña que conectas al puerto USB', sd:'la tarjeta de las cámaras y celulares', optico:'el CD, DVD o Blu-ray', router:'el que reparte el internet por Wi-Fi', tarjetared:'la tarjeta para conectarse a una red', bluetooth:'el adaptador para audífonos inalámbricos'},
+  after(){ initCardsGame('per-game',PER_GAME,PER_OPTS) },
+  summary(){ const t=(id)=>tagFor('perifericos',id); return `
+    <div class="sbox"><h3>Entrada</h3><p>Permiten ingresar datos e instrucciones a la computadora.</p><div class="tags">${['teclado','raton','escaner','microfono','camara','joystick'].map(t).join('')}</div></div>
+    <div class="sbox"><h3>Salida</h3><p>Muestran o proyectan la información procesada por la computadora.</p><div class="tags">${['monitorp','impresora','altavoces','auriculares','proyector'].map(t).join('')}</div></div>
+    <div class="sbox"><h3>Almacenamiento y comunicación</h3><p>Guardan información para su uso futuro, o conectan la computadora a redes y otros dispositivos.</p><div class="tags">${['discoext','usb','sd','optico','router','tarjetared','bluetooth'].map(t).join('')}</div></div>
+    ${cardsGameHTML('per-game','Juego: clasifica el periférico','¿De qué tipo es cada uno? Cuidado: algunos son de entrada y salida a la vez.',PER_GAME,PER_OPTS)}`; }
+};
+
+VIEWS.imprimir={
+  menu:'Cómo imprimir', menuSub:'Guía paso a paso', icon:'impresora', accentVar:'--acc-imprimir',
+  eyebrow:'Tema 11 · Impresión', title:'Guía paso a paso: cómo imprimir un documento',
+  lead:'Seis pasos para imprimir sin errores. Toca cada paso de la ruta y luego practica con el simulador de abajo.',
+  scene:sceneImprimir, vb:[900,560], pins:{},
+  items:[
+    {id:'prepara', name:'Prepara el documento', color:'#2F7BE8', icon:'documento', kind:'Paso 1',
+      lead:'Abre el archivo (PDF, Word, etc.) y revisa que esté listo.',
+      funcs:['Abrir el archivo','Revisar ortografía y formato','Verificar que no sobren hojas en blanco'],
+      ejemplo:'Abres tu trabajo en Word y corriges una falta antes de imprimir.',
+      more:['Usa la <b>vista previa</b> para ver cómo quedará cada hoja.','Revisar antes ahorra papel y tinta.']},
+    {id:'menu', name:'Accede al menú de impresión', color:'#F97316', icon:'menu', kind:'Paso 2',
+      lead:'Selecciona “Archivo” y luego “Imprimir”, o presiona Ctrl + P.',
+      funcs:['Menú Archivo → Imprimir','Atajo de teclado Ctrl + P'],
+      ejemplo:'Presionas Ctrl + P y se abre la ventana de impresión.',
+      more:['El atajo <span class="kbd">Ctrl</span> + <span class="kbd">P</span> funciona en casi todos los programas y en el navegador.','En el celular suele estar en el menú ⋮ → Imprimir o Compartir.']},
+    {id:'selecciona', name:'Selecciona la impresora', color:'#16A34A', icon:'impresora', kind:'Paso 3',
+      lead:'Elige la impresora correcta de la lista de dispositivos disponibles.',
+      funcs:['Elegir la impresora de la lista','Revisar que esté encendida y con papel','Verificar que esté conectada (USB o red)'],
+      ejemplo:'En la lista aparecen la impresora del salón y la de la biblioteca: eliges la del salón.',
+      more:['La opción <b>Guardar como PDF</b> (o “Microsoft Print to PDF”) no imprime: crea un archivo PDF.']},
+    {id:'ajusta', name:'Ajusta las configuraciones', color:'#7A3FC2', icon:'engrane', kind:'Paso 4',
+      lead:'Define el número de copias, páginas, tamaño de papel, orientación, etc.',
+      funcs:['Número de copias','Páginas: todas, la actual o un intervalo (por ejemplo 1-3)','Tamaño de papel: carta u oficio','Orientación: vertical u horizontal','Color o blanco y negro','Imprimir por ambas caras'],
+      ejemplo:'Pides 2 copias, solo de las páginas 1 a 3, en blanco y negro.',
+      more:['En México el papel más usado es el tamaño <b>carta</b>.'],
+      facts:[['21.6 × 27.9 cm','Tamaño carta'],['21.6 × 34 cm','Tamaño oficio'],['1-3','Intervalo de páginas']]},
+    {id:'clic', name:'Haz clic en Imprimir', color:'#2563EB', icon:'cursor', kind:'Paso 5',
+      lead:'Presiona el botón “Imprimir” o “Aceptar”.',
+      funcs:['Enviar el documento a la impresora'],
+      ejemplo:'Das clic en Imprimir y la impresora empieza a trabajar.',
+      more:['El documento entra a la <b>cola de impresión</b>.','Si te equivocaste, puedes cancelarlo desde la cola (icono de la impresora o Configuración → Impresoras).']},
+    {id:'recoge', name:'Recoge tus páginas', color:'#D63384', icon:'hojas', kind:'Paso 6',
+      lead:'Espera a que termine la impresión y revisa tus documentos.',
+      funcs:['Esperar a que salga la última hoja','Revisar que estén todas y en orden','Revisar que se vean bien'],
+      ejemplo:'Revisas que salieron las 3 páginas y las engrapas.',
+      more:['Si el papel se atora, no lo jales con fuerza: avisa al maestro.']}
+  ],
+  quiz:{prepara:'el paso donde revisas que el archivo esté listo', menu:'el paso del atajo Ctrl + P', selecciona:'el paso donde eliges el dispositivo de la lista', ajusta:'el paso de copias, orientación y tamaño de papel', clic:'el paso donde presionas Imprimir o Aceptar', recoge:'el último paso: revisar tus hojas'},
+  after:initPrintSim,
+  summary(){ return printSimHTML() + `
+    <div class="sbox"><h3>Atajo clave</h3><p class="big-note">Ctrl + P abre el menú de impresión en casi cualquier programa.</p></div>
+    <div class="sbox"><h3>Si no imprime, revisa</h3><ul class="ticks"><li>${TICK}<span>Que la impresora esté encendida y con papel.</span></li><li>${TICK}<span>Que esté conectada por cable o a la red.</span></li><li>${TICK}<span>Que elegiste la impresora correcta.</span></li><li>${TICK}<span>Que tenga tinta o tóner.</span></li></ul></div>
+    <div class="sbox"><h3>Ahorra papel</h3><ul class="ticks"><li>${TICK}<span>Usa la vista previa.</span></li><li>${TICK}<span>Imprime solo las páginas que necesitas.</span></li><li>${TICK}<span>Imprime por ambas caras.</span></li><li>${TICK}<span>Si no necesitas papel, guarda como PDF.</span></li></ul></div>`; }
+};
+
 /* ---------- Menú y portada ---------- */
 const menu=$('#menu');
 const homeIc='<svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>';
-const smallIc={monitor:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M9 20h6M12 16v4"/></svg>', procesador:'<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>', documento:'<svg viewBox="0 0 24 24"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg>', gabinete:'<svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 7h4M10 10h4"/><circle cx="12" cy="16" r="1.5"/></svg>', capas:'<svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg>', lupa:'<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>', escudo2:'<svg viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 5-3.2 8.5-7.5 10.5C7.7 20 4.5 16.5 4.5 11.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>', ventana:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01"/></svg>'};
+const smallIc={monitor:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M9 20h6M12 16v4"/></svg>', procesador:'<svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>', documento:'<svg viewBox="0 0 24 24"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg>', gabinete:'<svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 7h4M10 10h4"/><circle cx="12" cy="16" r="1.5"/></svg>', capas:'<svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg>', lupa:'<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>', escudo2:'<svg viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 5-3.2 8.5-7.5 10.5C7.7 20 4.5 16.5 4.5 11.5V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>', bicho:'<svg viewBox="0 0 24 24"><ellipse cx="12" cy="13.5" rx="5" ry="6.5"/><path d="M12 7v13M9 5l1.5 2.5M15 5l-1.5 2.5M7 11H3M7 15H3M17 11h4M17 15h4"/></svg>', usb:'<svg viewBox="0 0 24 24"><rect x="8" y="9" width="8" height="13" rx="2"/><path d="M9.5 9V3h5v6M11 5.5h.01M13 5.5h.01"/></svg>', impresora:'<svg viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 9V3h10v6M7 15h10v6H7z"/></svg>', ventana:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01"/></svg>'};
 menu.innerHTML = `<a class="mi" href="#inicio" data-view="inicio"><span class="mi-ic" style="--mc:var(--muted)">${homeIc}</span><span class="mi-t"><b>Inicio</b><small>Portada</small></span></a>` +
   Object.entries(VIEWS).map(([k,v])=>`<a class="mi" href="#${k}" data-view="${k}"><span class="mi-ic" style="--mc:var(${v.accentVar})">${smallIc[v.icon]}</span><span class="mi-t"><b>${v.menu}</b><small>${v.menuSub}</small></span></a>`).join('');
-$('#home-cards').innerHTML = Object.entries(VIEWS).map(([k,v],i)=>`<a class="tcard" href="#${k}" style="--mc:var(${v.accentVar})"><span class="mi-ic">${smallIc[v.icon]}</span><p class="eyebrow">${v.eyebrow}</p><h3>${v.title}</h3><p>${v.items.length} partes para explorar: ${v.items.map(x=>x.name.replace(/ \(.*\)/,'')).join(', ')}.</p><span class="go">Abrir tema →</span></a>`).join('');
 
 function heroArt(){
   const cx=450, cy=280, s=150;
@@ -1962,7 +2404,7 @@ $('#q-exit').onclick=()=>stopQuiz();
 function startQuiz(){
   const V=VIEWS[cur]; const ids=Object.keys(V.quiz);
   for(let i=ids.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [ids[i],ids[j]]=[ids[j],ids[i]]}
-  quiz={order:ids, i:0, first:0, missed:false};
+  quiz={order:ids.slice(0, V.quizMax||ids.length), i:0, first:0, missed:false};
   stage.classList.add('quiz'); stage.classList.remove('off'); $('#btn-off').setAttribute('aria-pressed','false');
   $('#btn-quiz').setAttribute('aria-pressed','true'); qStat.hidden=false; $('#chips').hidden=true; qBanner.hidden=false;
   $('#hint-txt').textContent='Lee la pista y toca la parte correcta en la imagen.';
